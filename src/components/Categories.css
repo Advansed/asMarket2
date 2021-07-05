@@ -1,0 +1,37 @@
+.ct-content {
+    display: flex;
+    overflow-x: scroll;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: left;
+    width: 100%;
+}
+
+.ct-content::-webkit-scrollbar {
+    display: none;
+}
+
+.ct-card {
+    width: 100px;
+    min-width: 100px;
+    height: auto;
+}
+
+.ct-img {
+    width: 100px;
+    height: 50px;
+}
+
+.ct-text {
+    margin: 0.5em;
+    font: 12px/12px Arial;
+}
+
+.ct-chip {
+    word-wrap: normal;
+}
+
+.ct-chip-div {
+    min-width: 2900em;
+    height: 3em;
+}

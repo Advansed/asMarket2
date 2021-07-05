@@ -1,6 +1,9 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar } from '@ionic/react';
 import { useParams } from 'react-router';
-import ExploreContainer from '../components/ExploreContainer';
+import { BasketIcon } from '../components/Basket';
+import { Carousel } from '../components/Carousel';
+import { Categories } from '../components/Categories';
+import { Goods } from '../components/Goods';
 import './Page.css';
 
 const Page: React.FC = () => {
@@ -14,20 +17,20 @@ const Page: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{name}</IonTitle>
+          <IonSearchbar />
+          <div slot="end">
+            <BasketIcon/>
+          </div>
         </IonToolbar>
+        <Carousel />
       </IonHeader>
-
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name={name} />
+        <Categories />
+
       </IonContent>
     </IonPage>
   );
 };
+
 
 export default Page;
