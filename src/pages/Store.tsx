@@ -17,6 +17,7 @@ export const i_state = {
     search:                         "",
     orders:                         [],
     category:                       "",
+    sub:                            "",
     gcard:                          "",
 
 }
@@ -74,10 +75,13 @@ function                create_Store(reducer, initialState) {
             return currentState;
         },
         dispatch(action) {
+            console.log(action)
             currentState = currentReducer(currentState, action);
             listeners.forEach((elem)=>{
                 if(elem.type === action.type){
                     elem.func();
+                    console.log("func")
+                    console.log(action)
                 }
             })
             return action;
@@ -101,17 +105,27 @@ const                   rootReducer = combineReducers({
     route:                  reducers[1],
     login:                  reducers[2],
     categories:             reducers[3],
-    goods:                  reducers[4],
+    goods:                  gdReducer, //reducers[4],
     basket:                 reducers[5],  
     order:                  reducers[6],  
     market:                 reducers[7],
     search:                 reducers[8],
     orders:                 reducers[9],  
     category:               reducers[10],  
-    gcard:                  reducers[11],
+    sub:                    reducers[11],  
+    gcard:                  reducers[12],
 
 })
 
+
+function                gdReducer(state:any = i_state.goods, action){
+    switch(action.type) {
+        case "goods": {    
+            return [...state, ...action.goods]
+        }
+        default: return state
+    }
+}
 
 export const Store   =  create_Store(rootReducer, i_state)
 
@@ -132,11 +146,12 @@ async function load( categ, page = 1 ){
     console.log( res )
     if(res.length > 0){
         Store.dispatch({ type: "goods", goods: res })
-        if( categ === Store.getState().category.Код )
-          load( categ, page + 1 )
-    }
+  //      if( categ === Store.getState().category.Код )
+        load( categ, page + 1 )
+    } 
 
 }
+
 
 async function exec(){
     let res: any
@@ -148,6 +163,8 @@ async function exec(){
     })})
 
     console.log(res) 
+
+    load( "", 1)
 
 }
 

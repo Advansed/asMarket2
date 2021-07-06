@@ -13,19 +13,25 @@ export function Categories():JSX.Element {
 
     useEffect(()=>{ setInfo( Store.getState().categories ) }, [])
 
-    useEffect(()=> { if(info.length > 0) setCats(info[0]) }, [info])
+    useEffect(()=> { 
+        if(info.length > 0) {
+            setCats(info[0]) 
+            Store.dispatch({type: "category", category: info[0]})
+        }
+    }, [info])
 
-    useEffect(()=> { if(cats.length > 0) setCat(cats.Категории[0]) }, [cats])
+    useEffect(()=> { 
+        if(cats.Категории?.length > 0) {
+            setCat(cats.Категории[0]) 
+            Store.dispatch({type: "sub", sub: cats.Категории[0]})
+        }
+    }, [cats])
 
     function onClick(info, num) {
-        if(num === 0) {
-            setCats(info)
-            if(info.Категории > 0)
-                setCat(info.Категории[0])
-            else    
-                setCat( undefined )
-        } else {
-    
+        if(num === 0) { setCats(info) }
+        if(num === 1) { 
+            setCat(info)
+            Store.dispatch({type: "sub", sub: info})
         }
     }
     let elem = <></>

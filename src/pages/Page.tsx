@@ -26,7 +26,7 @@ const Page: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <Categories />
-
+        <Goods />
       </IonContent>
     </IonPage>
   );
