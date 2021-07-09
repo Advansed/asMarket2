@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Store } from "../pages/Store"
-import { IonCard, IonImg, IonIcon, IonChip, IonText } from '@ionic/react';
+import { IonCard, IonImg, IonIcon, IonChip, IonText, IonButton, IonCardSubtitle, IonCardTitle} from '@ionic/react';
 
 import './Goods.css'
 import { cartOutline } from "ionicons/icons";
@@ -46,9 +46,12 @@ export function Goods():JSX.Element {
     }
 
     return <>
+
+        <div className="catalogue">
         <div className="g-content">
             { elem }
         </div>
+    </div>
     </> 
 }
 
@@ -68,26 +71,31 @@ export function   Good(props):JSX.Element {
                 Store.dispatch({type: "route", route: "/page/" + info.Код})
                 }}
             >
-                <div className="g-price">
+                                 
+                <IonImg src={ info.Картинка } className="g-img"/>
+                <div className="ml-1 mr-1">
+                    <IonCardSubtitle className="g-text"> { info.Наименование } </IonCardSubtitle>
+                </div>
+                <div className="g-position">
+                <IonButton className="g-size-btn" color="new" size="small">+</IonButton>
+                <IonButton color="new" size="small">
                     {
                     info.СтараяЦена > 0 
                         ?<>
-                        <div className="red f-14">
+                        <div className="red f-12">
                             <b>{  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.Цена)}</b>
                         </div>
-                        <div className="t-line f-14 ml-1">
+                        <div className="t-line f-12 ml-1">
                             <b>{  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СтараяЦена)}</b>
                         </div>
                         </>
-                        :<div className="f-14">
+                        :<div className="f-12">
                         <b >{  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.Цена)}</b>
                         </div>
                     }
                     
-                </div>                    
-                <IonImg src={ info.Картинка } className="g-img"/>
-                <div className="ml-1 mr-1">
-                    <IonText> { info.Наименование } </IonText>
+                </IonButton>  
+                <IonButton className="g-size-btn" color="new" size="small">-</IonButton>
                 </div>
                 <div>
                 </div>

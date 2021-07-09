@@ -3,6 +3,8 @@ import { Store } from "../pages/Store"
 import { IonCard, IonImg, IonText, IonChip } from '@ionic/react';
 
 import './Categories.css'
+import './bootstrap.css'
+import './style.css'
 
 export function Categories():JSX.Element {
     const [info, setInfo] = useState<any>([])
@@ -39,23 +41,28 @@ export function Categories():JSX.Element {
     for(let i = 0;i < info.length;i++){
         elem = <>
             { elem }
-            <IonCard class="ct-card" key = { i }
+            <div className="ct-card" key = { i }
                 onClick = { () => onClick(info[i], 0) }
             >
-                <IonImg class="ct-img" src={ info[i].Картинка } />
+                <div className="circle">
+                <IonImg class="ct-img" src={ info[i].Картинка } /></div>
                 <div className="ct-text">
                     <IonText> { info[i].Наименование }</IonText>
                 </div>
-            </IonCard>
+
+            </div>
         </>
     }
 
     let items = <></>
 
+    
     for(let i = 0;i < cats.Категории?.length;i++){
+        
         items = <>
             { items }
-            <IonChip className="ct-chip" key = { i }
+
+            <IonChip className="ct-chip bgcolor2" key = { i }
                 onClick = { () => onClick( cats.Категории[i], 1)}
             >
                 { cats.Категории[i].Наименование }

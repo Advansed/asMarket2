@@ -51,6 +51,12 @@
         min-width: auto !important;
         font: 10px Arial;
     }
+    hr{
+        width: 96%;
+        position: relative;
+
+        left: 2%;
+    }
 
 }
 @media screen and (max-width: 500px) {

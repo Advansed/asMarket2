@@ -30,6 +30,8 @@ export function Carousel():JSX.Element {
         </>
     }
 
-    return <div className="cr-content mr-05"> { elem } </div>
+    return <>
+    <div className="cr-content mr-05"> { elem } </div>
+    </>
 }
 

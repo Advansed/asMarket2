@@ -5,6 +5,8 @@
     flex-wrap: nowrap;
     justify-content: left;
     width: 100%;
+    border-radius: 10px 10px 0 0;
+    
 }
 
 .ct-content::-webkit-scrollbar {
@@ -15,24 +17,43 @@
     width: 100px;
     min-width: 100px;
     height: auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 .ct-img {
-    width: 100px;
+    
     height: 50px;
     object-fit: contain;
+    margin: 0 auto;
+    padding-top: 10px;
+
+    
 }
 
 .ct-text {
     margin: 0.5em;
     font: 12px/12px Arial;
+    text-align: center;
 }
 
 .ct-chip {
     word-wrap: normal;
+    
 }
 
 .ct-chip-div {
     min-width: 2900em;
-    height: 3em;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #4d4d4d;
+    padding-left: 10px;
+    
+
 }
+ion-chip{
+    background-color: #a7c565 !important; 
+    color: #fff 
+}
+
