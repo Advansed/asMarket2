@@ -1,3 +1,12 @@
 .bs-icon {
     margin: 0.5em;
 }
+
+.bs-red {
+    position: absolute;
+    top: 0;
+    right: 1.5em;
+    color: red;
+    z-index: 800;
+    font: bold;
+}

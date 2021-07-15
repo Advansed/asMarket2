@@ -1,6 +1,9 @@
 import {
+  IonButton,
+  IonCol,
   IonContent,
   IonIcon,
+  IonImg,
   IonItem,
   IonLabel,
   IonList,
@@ -8,6 +11,7 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
+  IonRow,
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
@@ -23,44 +27,38 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: 'Inbox',
-    url: '/page/Inbox',
+    title: 'Категории',
+    url: '/page/root',
     iosIcon: mailOutline,
     mdIcon: mailSharp
   },
   {
-    title: 'Outbox',
-    url: '/page/Outbox',
+    title: 'Заказы',
+    url: '/goods/orders',
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp
   },
   {
-    title: 'Favorites',
-    url: '/page/Favorites',
+    title: 'История',
+    url: '/goods/history',
     iosIcon: heartOutline,
     mdIcon: heartSharp
   },
   {
-    title: 'Archived',
-    url: '/page/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp
-  },
-  {
-    title: 'Trash',
-    url: '/page/Trash',
+    title: 'Условия работы',
+    url: '/goods/cond',
     iosIcon: trashOutline,
     mdIcon: trashSharp
   },
   {
-    title: 'Spam',
-    url: '/page/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
+    title: 'О нас',
+    url: '/goods/about',
+    iosIcon: archiveOutline,
+    mdIcon: archiveSharp
+  },
 ];
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+const labels = ['Акции', 'Бренды', 'Скидки', 'Уценка', 'Распродажа'];
 
 const Menu: React.FC = () => {
   const location = useLocation();
@@ -69,8 +67,18 @@ const Menu: React.FC = () => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>
+            <IonRow>
+              <IonCol>
+                МаркетАс
+                <IonNote>asmrkt@mail.ru</IonNote>
+              </IonCol>
+              <IonCol>
+                  <IonImg src = "assets/asMarket.jpg" class="m-img" />
+              </IonCol>
+            </IonRow>
+          </IonListHeader>
+          
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
@@ -84,7 +92,7 @@ const Menu: React.FC = () => {
         </IonList>
 
         <IonList id="labels-list">
-          <IonListHeader>Labels</IonListHeader>
+          <IonListHeader>Акции, Скидки, Бренды</IonListHeader>
           {labels.map((label, index) => (
             <IonItem lines="none" key={index}>
               <IonIcon slot="start" icon={bookmarkOutline} />

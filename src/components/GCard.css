@@ -1,0 +1,72 @@
+
+
+ @media screen and (max-width: 2900px) {
+    .f-card { 
+        width: 580px;
+        height: auto; 
+        margin-left: auto; 
+        margin-right: auto;
+        margin-top: 0;
+    }
+    
+    .f-price {
+        /* margin-left: 1em; */
+        margin-top: 0.3em;
+        font: 30px Montserrat_bold;
+        color: var(--b_color);
+      }
+    
+    .gc-div-1{
+        border: 0;
+        padding-top: 3px;
+        font-size: var(--sizeFontLg);
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .gc-div-2{
+
+        height: 40%;
+        color: darkgray;
+        font-size: 14px;
+        text-align: center;
+
+    }
+    
+    .gc-but {
+        width: 4em;
+        height: 4em;
+    }
+
+    .gc-card {
+        width: 760px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .gc-text-2 {
+        line-height: 2;
+        font: 14px/18px Sans;
+    }
+}
+  
+@media screen and (max-width: 500px) {
+    .f-card { 
+        width: 95%;
+        height: auto; 
+        margin-left: auto; 
+        margin-right: auto;
+        margin-top: 0;
+    }
+    
+    .f-price {
+        /* margin-left: 1em; */
+        margin-top: 0.3em;
+        font: 16px Montserrat_bold;
+      }
+    
+    .gc-card {
+        width: 95%;
+    }
+}
+  

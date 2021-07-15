@@ -1,15 +1,59 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar } from '@ionic/react';
-import { useParams } from 'react-router';
-import { BasketIcon } from '../components/Basket';
+import { useHistory, useParams } from 'react-router';
+import { Basket, BasketIcon } from '../components/Basket';
 import { Carousel } from '../components/Carousel';
 import { Categories } from '../components/Categories';
+import { GCard } from '../components/GCard';
 import { Goods } from '../components/Goods';
 import './Page.css';
+import { Store } from './Store';
 
 const Page: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
 
+  let hust = useHistory();
+
+  document.addEventListener('ionBackButton', (ev: any) => {
+    ev.detail.register(10, () => {
+      hust.goBack();
+    });
+  });
+
+
+  Store.subscribe({num: 1, type: "route", func: ()=>{ 
+  let route = Store.getState().route;
+  console.log(route)
+  switch( route ) {
+    case "back": hust.goBack(); break
+    case "forward": hust.goForward(); break;
+    default: hust.push( route );
+  }
+  }})
+
+  function Main():JSX.Element {
+    let elem = <></>
+
+    console.log(name.substr(0, 1))
+    console.log(name.substr(1))
+    if(name.substr(0, 1) === "_"){
+      elem = <>
+        <GCard info = { name.substr(1) }/>
+      </>
+    } else
+    switch(name){
+      case "root": elem = <>
+        <Carousel />
+        <Categories />
+        <Goods />
+      </>; break
+      case "basket": elem = <>
+        <Basket />
+      </>; break
+      default: elem = <></>;
+    }
+    return elem
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -22,11 +66,9 @@ const Page: React.FC = () => {
             <BasketIcon/>
           </div>
         </IonToolbar>
-        <Carousel />
       </IonHeader>
       <IonContent fullscreen>
-        <Categories />
-        <Goods />
+        <Main />
       </IonContent>
     </IonPage>
   );

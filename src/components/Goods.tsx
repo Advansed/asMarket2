@@ -3,7 +3,8 @@ import { Store } from "../pages/Store"
 import { IonCard, IonImg, IonIcon, IonChip, IonText, IonButton, IonCardSubtitle, IonCardTitle} from '@ionic/react';
 
 import './Goods.css'
-import { cartOutline } from "ionicons/icons";
+import { useHistory } from "react-router";
+import { addBasket } from "./Basket";
 
 
 export function Goods():JSX.Element {
@@ -12,28 +13,24 @@ export function Goods():JSX.Element {
     const [upd, setUpd]     = useState(0)
 
     Store.subscribe({num: 21, type: "sub", func: ()=>{
-        console.log("subscribe 1")
         setSub(Store.getState().sub)
     }})
     Store.subscribe({num: 22, type: "goods", func: ()=>{
-        console.log("subscribe 2 - " + upd.toString())
         setUpd(upd + 1)
     }})
 
     useEffect(()=>{
-        console.log("useEffect 2 - 3")
         if(sub !== "") {
             let goods = Store.getState().goods
             let jarr : any = []
             goods.forEach(elem => {
-                if(elem.СубКатегория === sub.Код) jarr = [...jarr, elem]
+                if(elem.СубКатегория === sub?.Код) jarr = [...jarr, elem]
             });
             setInfo(jarr)
         }
     }, [sub, upd])
 
     useEffect(()=>{
-        console.log("useEffect 1")
         setSub(Store.getState().sub)
     }, [])
 
@@ -59,6 +56,7 @@ export function   Good(props):JSX.Element {
   let info = props.info
 
   let elem = <></>
+  let hist = useHistory();
 
   let pr = 100 - info.Цена * 100 / info.СтараяЦена;
 
@@ -67,8 +65,9 @@ export function   Good(props):JSX.Element {
         <div className="g-card-div">
             <IonCard class="g-card"
                 onClick={()=>{
-                Store.dispatch({type: "gcard", gcard: info})
-                Store.dispatch({type: "route", route: "/page/" + info.Код})
+                    Store.dispatch({type: "gcard", gcard: info})
+                    hist.push("/page/_" + info.Код)    
+//                    Store.dispatch({type: "route", route: "/page/#" + info.Код})
                 }}
             >
                                  
@@ -77,7 +76,12 @@ export function   Good(props):JSX.Element {
                     <IonCardSubtitle className="g-text"> { info.Наименование } </IonCardSubtitle>
                 </div>
                 <div className="g-position">
-                <IonButton className="g-size-btn" color="new" size="small">+</IonButton>
+                <IonButton className="g-size-btn" color="new" size="small"
+                    onClick = {(e)=>{
+                        addBasket(info, 1)
+                        e.stopPropagation()
+                    }}
+                >+</IonButton>
                 <IonButton color="new" size="small">
                     {
                     info.СтараяЦена > 0 
@@ -95,7 +99,12 @@ export function   Good(props):JSX.Element {
                     }
                     
                 </IonButton>  
-                <IonButton className="g-size-btn" color="new" size="small">-</IonButton>
+                <IonButton className="g-size-btn" color="new" size="small"
+                    onClick = {(e)=>{
+                        addBasket(info, -1)
+                        e.stopPropagation()
+                    }}                
+                >-</IonButton>
                 </div>
                 <div>
                 </div>
