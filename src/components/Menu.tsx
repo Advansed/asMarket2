@@ -68,15 +68,19 @@ const Menu: React.FC = () => {
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>
-            <IonRow>
-              <IonCol>
-                МаркетАс
-                <IonNote>asmrkt@mail.ru</IonNote>
-              </IonCol>
-              <IonCol>
-                  <IonImg src = "assets/asMarket.jpg" class="m-img" />
-              </IonCol>
-            </IonRow>
+            <IonItem>
+              <IonImg slot = "start" src = "assets/asMarket.jpg" class="m-img" />
+                <div>
+                  <div>
+                    Маркет Ас
+                  </div>
+                  <div>
+                    <IonButton
+                      expand= "block"
+                    > Вход </IonButton>
+                  </div>
+                </div>
+            </IonItem>
           </IonListHeader>
           
           {appPages.map((appPage, index) => {

@@ -111,3 +111,8 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 } 
+
+.m-img {
+  height: 3em;
+  width: 3em;
+}
