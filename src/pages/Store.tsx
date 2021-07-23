@@ -158,6 +158,7 @@ async function exec(){
 
     res = await getData("method", {method: "Категории"})
     Store.dispatch({type: "categories", categories: res.map((e) => {
+        console.log(e.Категории)
         e.Категории = JSON.parse(e.Категории)
         return e
     })})
