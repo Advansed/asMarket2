@@ -18,6 +18,7 @@
     "axios": "^0.21.1",
     "ionicons": "^5.4.0",
     "react": "^17.0.1",
+    "react-dadata": "^2.9.3",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

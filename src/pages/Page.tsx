@@ -5,6 +5,8 @@ import { Carousel } from '../components/Carousel';
 import { Categories } from '../components/Categories';
 import { GCard } from '../components/GCard';
 import { Goods } from '../components/Goods';
+import { Order } from '../components/Order';
+import { Login, SMS } from '../components/Registration';
 import './Page.css';
 import { Store } from './Store';
 
@@ -50,7 +52,16 @@ const Page: React.FC = () => {
       case "basket": elem = <>
         <Basket />
       </>; break
-      default: elem = <></>;
+      case "order": elem = <>
+        <Order />
+      </>; break
+      case "login": elem = <>
+        <Login />
+      </>; break
+      case "SMS": elem = <>
+        <SMS />
+      </>; break
+  default: elem = <></>;
     }
     return elem
   }

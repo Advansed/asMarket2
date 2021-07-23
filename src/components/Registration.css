@@ -1,0 +1,38 @@
+
+.lg-input {
+    width: 92%;
+    display: flex;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    padding-left: 0.5em;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.lg-sms-box {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.lg-div-1 {
+    width: 100%;
+    margin-left: 1em;
+    letter-spacing: 1em;
+}
+.lg-sms-input {
+    width: 100%;
+    position: absolute;
+    background: transparent;
+    top: 0;
+    left: 0;
+    letter-spacing: 1em;
+}
