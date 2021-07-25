@@ -6,6 +6,7 @@ import { Categories } from '../components/Categories';
 import { GCard } from '../components/GCard';
 import { Goods } from '../components/Goods';
 import { Order } from '../components/Order';
+import { Profile } from '../components/Profile';
 import { Login, SMS } from '../components/Registration';
 import './Page.css';
 import { Store } from './Store';
@@ -25,7 +26,6 @@ const Page: React.FC = () => {
 
   Store.subscribe({num: 1, type: "route", func: ()=>{ 
   let route = Store.getState().route;
-  console.log(route)
   switch( route ) {
     case "back": hust.goBack(); break
     case "forward": hust.goForward(); break;
@@ -36,8 +36,6 @@ const Page: React.FC = () => {
   function Main():JSX.Element {
     let elem = <></>
 
-    console.log(name.substr(0, 1))
-    console.log(name.substr(1))
     if(name.substr(0, 1) === "_"){
       elem = <>
         <GCard info = { name.substr(1) }/>
@@ -60,6 +58,9 @@ const Page: React.FC = () => {
       </>; break
       case "SMS": elem = <>
         <SMS />
+      </>; break
+      case "profile": elem = <>
+        <Profile />
       </>; break
   default: elem = <></>;
     }

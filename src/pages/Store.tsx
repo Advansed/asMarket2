@@ -8,7 +8,8 @@ export const i_state = {
 
     auth:                        false,
     route:                          "",
-    login:                          "",
+    login:                          {code: "", SMS: "", name: "", address: ""
+    , paymentmethod: "", password: "", email: "", image: ""},
     categories:                     [],
     goods:                          [],
     basket:                         [],
@@ -65,6 +66,22 @@ export async function   getData(method : string, params){
 
 }
 
+export async function   getData1C(method : string, params){
+
+    let res = await axios.post(
+            URL1C + method, params
+    ).then(response => response.data)
+        .then((data) => {
+            if(data.Код === 200) console.log(data) 
+            return data
+        }).catch(error => {
+          console.log(error)
+          return {Код: 200}
+        })
+    return res
+
+}
+
 
 function                create_Store(reducer, initialState) {
     var currentReducer = reducer;
@@ -75,13 +92,10 @@ function                create_Store(reducer, initialState) {
             return currentState;
         },
         dispatch(action) {
-            console.log(action)
             currentState = currentReducer(currentState, action);
             listeners.forEach((elem)=>{
                 if(elem.type === action.type){
                     elem.func();
-                    console.log("func")
-                    console.log(action)
                 }
             })
             return action;
@@ -114,7 +128,6 @@ const                   rootReducer = combineReducers({
     category:               reducers[10],  
     sub:                    reducers[11],  
     gcard:                  reducers[12],
-
 })
 
 
@@ -129,7 +142,7 @@ function                gdReducer(state:any = i_state.goods, action){
 
 export const Store   =  create_Store(rootReducer, i_state)
 
-//export const URL = "https://marketac.ru/ut/hs/API/V1/"
+export const URL1C = "https://marketac.ru/ut/hs/API/V1/"
 
 export const URL = "http://marketac.ru:3000/"
 
@@ -143,7 +156,6 @@ async function load( categ, page = 1 ){
         page: page,
     })  
 
-    console.log( res )
     if(res.length > 0){
         Store.dispatch({ type: "goods", goods: res })
   //      if( categ === Store.getState().category.Код )
@@ -152,18 +164,40 @@ async function load( categ, page = 1 ){
 
 }
 
+export function Phone(phone): string {
+    if(phone === undefined) return ""
+    let str = "+"
+    for(let i = 0;i < phone.length;i++){
+      let ch = phone.charCodeAt(i)
+      if( ch >= 48 && ch <= 57) str = str + phone.charAt(i)
+    }
+    return str
+}
+
+export async function getProfile(phone){
+    Store.dispatch({type: "auth", auth: true });
+    let res = await getData("method", {
+            method: "Профиль",
+            phone:  Phone(phone),
+        })
+    let login = res[0];login.type = "login"
+    Store.dispatch( login )
+    console.log(res[0])
+}
 
 async function exec(){
     let res: any
 
+    let phone = localStorage.getItem("marketAs.login")
+    if(phone !== undefined) getProfile(phone)
+
+    console.log("exec")
     res = await getData("method", {method: "Категории"})
+    console.log(res)
     Store.dispatch({type: "categories", categories: res.map((e) => {
-        console.log(e.Категории)
         e.Категории = JSON.parse(e.Категории)
         return e
     })})
-
-    console.log(res) 
 
     load( "", 1)
 

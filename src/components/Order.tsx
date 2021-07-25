@@ -193,12 +193,13 @@ export function   Order( props ):JSX.Element {
             </IonItem>
             <IonItem class="ml-1" lines="none">
               <IonCardSubtitle>Заказано на сумму </IonCardSubtitle>
-              <IonLabel slot="end" class="a-right">{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаЗаказа) } </IonLabel>
+              <IonLabel slot="end" class="a-right">{ 
+                  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаЗаказа) } </IonLabel>
             </IonItem>
             <IonItem class="ml-1" lines="none">
               <IonCardSubtitle>Итого </IonCardSubtitle>
               <IonLabel slot="end" class="a-right">{ 
-                new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаВсего)
+                  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаВсего)
               } </IonLabel>
             </IonItem>
           </IonList>

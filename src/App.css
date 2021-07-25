@@ -64,10 +64,10 @@
 .w-4 { width: 4em}
 
 @font-face {
-    font-family: 'Sans';
-    src: "assets/fonts/OpenSans-SemiBold.ttf";
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Aeroport';
+    src: "assets/Aeroport.ttf";
+    /* font-weight: normal; */
+    /* font-style: normal; */
 }
 
 .f-10 {font: 10px Arial }
@@ -238,6 +238,9 @@ ion-segment-button {
 
 .a-right {
     text-align: right;
+}
+.a-center {
+    text-align: center;
 }
 
 .t-line {
