@@ -2,18 +2,26 @@
 
  @media screen and (max-width: 2900px) {
     .f-card { 
-        width: 580px;
-        height: auto; 
-        margin-left: auto; 
-        margin-right: auto;
-        margin-top: 0;
+        width: 100%;
+        height: 200px; 
+        margin: 0 auto;
+        text-align: center;
+        
     }
-    
+    .f-content {
+        background-color: #ecececbe !important; 
+        margin-top: 1em;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px 15px 0 0;
+        
+        
+    }   
     .f-price {
         /* margin-left: 1em; */
-        margin-top: 0.3em;
-        font: 30px Montserrat_bold;
-        color: var(--b_color);
+        
+        font-size: 20px !important;
+        color: #FF8C00;
       }
     
     .gc-div-1{
@@ -22,6 +30,7 @@
         font-size: var(--sizeFontLg);
         font-weight: 700;
         text-align: center;
+       
     }
 
     .gc-div-2{
@@ -30,13 +39,10 @@
         color: darkgray;
         font-size: 14px;
         text-align: center;
+        
 
     }
     
-    .gc-but {
-        width: 4em;
-        height: 4em;
-    }
 
     .gc-card {
         width: 760px;
@@ -45,11 +51,29 @@
     }
 
     .gc-text-2 {
-        line-height: 2;
-        font: 14px/18px Sans;
+        line-height: 3;
+        font: 18px/22px Sans;
+    }
+    .gc-btn{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid #FF8C00;
+        color: #FF8C00;
+        background-color: #ecececbe;
+        text-align: center;
+        margin: 0 auto;
     }
 }
-  
+ion-item{
+    background-color: #e6e6e6e8 !important; 
+    
+}
+ion-chip{
+    background-color: #ecececbe !important;
+    color: #31ac26;
+    
+}
 @media screen and (max-width: 500px) {
     .f-card { 
         width: 95%;

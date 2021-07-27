@@ -14,7 +14,7 @@
     }
 
     .cr-card {
-        width: 200px;
+        width: 400px !important;
         height: 100px;
         position: relative;
     }

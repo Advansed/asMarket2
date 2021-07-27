@@ -50,9 +50,7 @@ export function   GCard(props):JSX.Element {
   }
 
   let elem = <>
-        <IonCard class="f-card" >
-          <IonRow>
-            <IonCol size="5">
+
               {/* <IonButton fill="clear" 
                 onClick={()=>{
                   Store.dispatch({type: "route", route: "back"})
@@ -60,28 +58,50 @@ export function   GCard(props):JSX.Element {
               >
                 <IonIcon icon={ arrowBackOutline } />
               </IonButton> */}
-              <img className="" src={  good.Картинка } alt="" />
-            </IonCol>
-            <IonCol size="7">
-              <IonItem>
+              <div className="gc-card"></div>
+              <div className="ml-025 ">
+              <IonButton color="light"
+                onClick = {()=>{
+                  Store.dispatch({ type: "route", route: "back" })
+                }}
+              >
+                <IonIcon icon = { arrowBackOutline } />
+              </IonButton>
+              </div>
+              <div className="f-card">
+                <img className="" src={  good.Картинка } alt="" width="70%"/>
+                </div>
+              
+            
+            <div className="f-content">
+            <IonRow>
+              <IonCardHeader>
                 <h4 className="a-center f-18"><b>{ good.Наименование }</b></h4>
-              </IonItem>
-              <IonItem class="f-14">
-                <IonLabel position="stacked"> Цена </IonLabel>
-                  <div className="mt-1 mb-1 ml-1">
+              </IonCardHeader>
+              </IonRow>
+              <IonRow>
+              <IonCol size="5">
+              <IonCardTitle class="f-18">
+                  <div className="mb-1 ml-1">
                     <div>
-                      <IonText class="f-price a-center"><b>{ good.Цена?.toFixed(2) + " ₽/шт " } </b></IonText>
+                      <IonText class="f-price a-center"><b>{ good.Цена?.toFixed(2) + " ₽ " } </b></IonText>
                     </div>
                   </div>
-                <IonChip>
+                  <div className="mb-1 ml-05 mt-3">
+                <IonChip color="success" outline>
                   <IonIcon icon = { checkmarkCircleOutline }/>
                   <IonText class="f-12"> { good.Количество > 0 ? "В Наличии" : "Под заказ" } </IonText>
                 </IonChip>
-              </IonItem>
-            </IonCol>
-          </IonRow>
-          <IonItem lines = "none" class="gc-item">
-            <IonButton slot = "start" shape="round" class="gc-but"
+                </div>
+              </IonCardTitle>
+              </IonCol>
+              
+              <IonCol size="7">
+              <div className="ml-2 mt-2 mr-1">
+                <IonRow>
+                <IonCol size="3">
+                  
+              <button className="gc-btn"
               onClick={()=>{
                 info.Количество = info.Количество - 1 
                 if(info.Количество  < 0) info.Количество = 0
@@ -91,7 +111,9 @@ export function   GCard(props):JSX.Element {
               }}
             >
               <IonIcon icon = { removeOutline } />
-            </IonButton>
+            </button>
+            </IonCol>
+            <IonCol size="6">
             <div className="w-100">
               <div className="gc-div-1 f-16">
                 { Количество()?.toString() + " шт" } 
@@ -100,7 +122,9 @@ export function   GCard(props):JSX.Element {
                 { (info.Цена * Количество())?.toString() + " руб" } 
               </div>
             </div>
-            <IonButton slot = "end" shape = "round" class="gc-but"
+            </IonCol>
+            <IonCol size="3">
+            <button className="gc-btn"
               onClick={()=>{
                 info.Количество = info.Количество + 1 
                 info.Сумма = info.Количество * info.Цена;
@@ -109,30 +133,31 @@ export function   GCard(props):JSX.Element {
               }}
             >
               <IonIcon icon = { addOutline } />
-            </IonButton>
-          </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">Описание</IonLabel>
+            </button>
+            </IonCol>
+            </IonRow>
+            </div>
+            </IonCol>
+            
+              </IonRow>
+
+          <IonRow>
+            <IonCardHeader ><b>Описание</b></IonCardHeader>
             <IonText class="gc-text-2">
               { good.Описание }
             </IonText>
-          </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">Производитель</IonLabel>
+            </IonRow>
+            <IonRow>
+            <IonCardHeader ><b>Производитель</b></IonCardHeader>
             <IonText class="gc-text-2">
               { good.Производитель }
             </IonText>
-          </IonItem>
-          <IonToolbar>
-              <IonButton
-                onClick = {()=>{
-                  Store.dispatch({ type: "route", route: "back" })
-                }}
-              >
-                Назад к покупкам
-              </IonButton>
-          </IonToolbar>
-        </IonCard>
+            </IonRow>
+          
+          
+              
+          
+          </div>
     </>
     
     
