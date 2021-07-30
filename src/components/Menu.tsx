@@ -69,6 +69,7 @@ const Menu: React.FC = () => {
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>
+          <IonMenuToggle autoHide={false}>
             <IonItem>
               <IonImg slot = "start" src = "assets/asMarket.jpg" class="m-img" />
                 <div>
@@ -79,12 +80,16 @@ const Menu: React.FC = () => {
                     <IonButton
                       expand= "block"
                       onClick = {()=>{
-                        Store.dispatch({type: "route", route: "/page/login"})
+                        if(Store.getState().auth)
+                          Store.dispatch({type: "route", route: "/page/profile"})
+                        else
+                          Store.dispatch({type: "route", route: "/page/login"})
                       }}
-                    > Вход </IonButton>
+                    > { Store.getState().auth ? "Профиль" : "Вход" } </IonButton>
                   </div>
                 </div>
             </IonItem>
+            </IonMenuToggle>
           </IonListHeader>
           
           {appPages.map((appPage, index) => {

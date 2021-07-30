@@ -1,11 +1,11 @@
 import { IonAlert, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCol
   , IonIcon, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonText } from "@ionic/react";
 import { Component } from "ionicons/dist/types/stencil-public-runtime";
-import { arrowBackOutline, bicycleOutline, businessOutline, cardOutline, cashOutline, homeOutline, phonePortrait, storefrontOutline, timeOutline } from "ionicons/icons";
+import { arrowBackOutline, basket, bicycleOutline, businessOutline, cardOutline, cashOutline, homeOutline, phonePortrait, storefrontOutline, timeOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { AddressSuggestions } from "react-dadata";
 import MaskedInput from "../mask/reactTextMask";
-import { Store } from "../pages/Store";
+import { getData1C, Store } from "../pages/Store";
 import './Order.css'
 
 declare type Dictionary = {
@@ -18,10 +18,10 @@ export function   Order( props ):JSX.Element {
     const [dost,      setDost]    = useState(true)
     const [info,      setInfo]    = useState<any>({
         type:             "order",
-        Организация:      Store.getState().market.Наименование,
-        Адрес:            Store.getState().market.Адрес,
-        token:            Store.getState().login.ГУИД,
-        Телефон:          Store.getState().login.Телефон,
+        Организация:      Store.getState().market.name,
+        Адрес:            Store.getState().market.address,
+        token:            "",
+        Телефон:          Store.getState().login.code,
         Доставка:         "Доставка",
         МетодОплаты:      "картой",
         АдресДоставки:    "",
@@ -36,20 +36,21 @@ export function   Order( props ):JSX.Element {
 
     useEffect(()=>{
       let basket = Store.getState().basket
+      let login = Store.getState().login;
       let sum = basket.reduce(function(a, b){ return a + b.Сумма;}, 0); 
         let order = {
           type:             "order",
-          Организация:      Store.getState().market.Наименование,
-          Адрес:            Store.getState().market.Адрес,
-          token:            Store.getState().login.ГУИД,
-          Телефон:          Store.getState().login.Телефон,
+          Организация:      Store.getState().market.name,
+          Адрес:            Store.getState().market.address,
+          token:            "",
+          Телефон:          login.code,
           Доставка:         "Доставка",
           МетодОплаты:      "картой",
-          АдресДоставки:    "",
+          АдресДоставки:    login.address,
           ВремяДоставки:    "",
           СуммаЗаказа:      sum,
-          СуммаДоставки:    sum >= 1000 ? 0 : Store.getState().market.Доставка,
-          СуммаВсего:       sum >= 1000 ? sum : Store.getState().market.Доставка + sum,
+          СуммаДоставки:    sum >= 1000 ? 0 : Store.getState().market.sum,
+          СуммаВсего:       sum >= 1000 ? sum : Store.getState().market.sum + sum,
           Товары:           Store.getState().basket  
         }
         setInfo(order)
@@ -193,12 +194,13 @@ export function   Order( props ):JSX.Element {
             </IonItem>
             <IonItem class="ml-1" lines="none">
               <IonCardSubtitle>Заказано на сумму </IonCardSubtitle>
-              <IonLabel slot="end" class="a-right">{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаЗаказа) } </IonLabel>
+              <IonLabel slot="end" class="a-right">{ 
+                  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаЗаказа) } </IonLabel>
             </IonItem>
             <IonItem class="ml-1" lines="none">
               <IonCardSubtitle>Итого </IonCardSubtitle>
               <IonLabel slot="end" class="a-right">{ 
-                new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаВсего)
+                  new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаВсего)
               } </IonLabel>
             </IonItem>
           </IonList>
@@ -347,14 +349,38 @@ export function   Order( props ):JSX.Element {
     }
   
     async function Order(order){
-     
-      // info.СтатусОплаты = "Не оплачено"
-      // info.МетодДоставки = order.Доставка
-      // info.Покупатель = "Покупатель"
-      // getData("Заказ", info )
-      
-     Store.dispatch({type: "basket", basket: []})
-      return true
+      let login = Store.getState().login
+      let auth = Store.getState().auth
+      let basket = Store.getState().basket;
+      let Zakaz = {
+        StatusId: 0,
+        Phone: login.code,
+        Address: order.АдресДоставки,
+        CustomerName : login.name,
+        token: "",
+        DeliveryMethod: order.Доставка,
+        DeliveryTime: order.ВремяДоставки,
+        PaymentMethodId: order.МетодОплаты,
+        CustomerMethodId: login.name,
+        CustomerComment: "",
+        PaymentStatus: 0,
+        OrderDetails: basket.map(e =>{
+          return {
+              ProductId: e.Код, 
+              Name: e.Наименование, 
+              Weight: e.Вес, 
+              Amount: e.Количество, 
+              Price: e.Цена, 
+              Total: e.Сумма}
+          }),
+      }
+      let res = await getData1C("Order", Zakaz);
+      if(res === "Создан документ") {
+        Store.dispatch({type: "basket", basket: []})
+        return true
+      } else {
+        return false
+      }
     }
   
     return elem;
