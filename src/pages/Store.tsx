@@ -194,7 +194,7 @@ async function exec(){
     let res: any
 
     let phone = localStorage.getItem("marketAs.login")
-    if(phone !== undefined) getProfile(phone)
+  //  if(phone !== undefined) getProfile(phone)
 
     console.log("exec")
     res = await getData("method", {method: "Категории"})
