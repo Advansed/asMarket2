@@ -8,18 +8,23 @@ export const i_state = {
 
     auth:                        false,
     route:                          "",
-    login:                          {code: "", SMS: "", name: "", address: ""
-    , paymentmethod: "", password: "", email: "", image: ""},
-    categories:                     [],
-    goods:                          [],
-    basket:                         [],
-    order:                          "",
-    market:                         "",
-    search:                         "",
-    orders:                         [],
-    category:                       "",
-    sub:                            "",
-    gcard:                          "",
+    login:                          {
+          code: "", SMS: "", name: "", address: ""
+        , paymentmethod: "", password: "", email: "", image: ""},
+    categories:                                     [],
+    goods:                                          [],
+    basket:                                         [],
+    order:                                          "",
+    market:                                         {
+        name:     "АсМаркет",
+        address:    "ул. Полины Осипенко, 8/1, Якутск, Респ. Саха (Якутия), 677001",
+        sum:                                       250,
+    },
+    search:                                         "",
+    orders:                                         [],
+    category:                                       "",
+    sub:                                            "",
+    gcard:                                          "",
 
 }
 
