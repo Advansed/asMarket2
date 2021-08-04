@@ -14,7 +14,7 @@
     }
 
     .cr-card {
-        width: 400px !important;
+        width: 200px;
         height: 100px;
         position: relative;
     }
@@ -51,6 +51,7 @@
         min-width: auto !important;
         font: 10px Arial;
     }
+    
     hr{
         width: 96%;
         position: relative;

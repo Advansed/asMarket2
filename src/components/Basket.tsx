@@ -1,6 +1,7 @@
-import { IonButton, IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonChip, IonCol, IonGrid, IonIcon, IonImg, IonLabel, IonRow, IonText, IonToolbar } from '@ionic/react';
-import { addCircleOutline, arrowBackOutline, cartOutline, closeOutline, removeCircle, trashBinOutline } from 'ionicons/icons';
+import { IonButton, IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonChip, IonCol, IonGrid, IonIcon, IonImg, IonLabel, IonRow, IonText, IonToolbar, IonFooter} from '@ionic/react';
+import { addCircleOutline, addOutline, arrowBackOutline, cartOutline, closeOutline, removeCircle, removeOutline, trashBinOutline } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
+import { SuperElementAccessExpression } from 'typescript';
 import { Store } from '../pages/Store';
 import './Basket.css';
 
@@ -81,6 +82,7 @@ function  delBasket(Код){
         Сумма:          amount * good.Цена,
         Упаковка:       good.Уп,
         Картинка:       good.Картинка
+        
     }]
   
       Store.dispatch({type: "basket", basket: basket})
@@ -132,6 +134,8 @@ function  delBasket(Код){
       
           }
       }
+
+     
       
       function  BItem(props):JSX.Element{
   
@@ -139,44 +143,47 @@ function  delBasket(Код){
           let Количество          = info.Количество 
   
           return <>
-            <IonRow class="r-underline">
+            
+            <IonRow class="r-underline ">
+              <IonCol size="1">
+                    
+                    <IonIcon icon={ closeOutline } 
+                        onClick={()=>{
+                          delBasket(info.Код); setUpd(upd + 1);
+                        }} 
+                    />
+              
+              </IonCol>
               <IonCol size="2">
-                <IonIcon class="b-but" icon={ closeOutline } 
-                    onClick={()=>{
-                      delBasket(info.Код); setUpd(upd + 1);
-                    }}
-                />
-                <IonImg id="a-margin" src={info.Картинка} class="b_img"/>
+                  <IonImg id="a-margin" src={info.Картинка} class="b_img"/>
               </IonCol>
-              <IonCol size="10">
-                <IonCardSubtitle> {info.Наименование} </IonCardSubtitle>
-                <IonCardTitle> 
-                  <div>
-                    <div>
-                      <IonChip class="w-100">
-                        <div className="w-40 b-div-1">
-                          <IonButton class="i-but" fill="clear" onClick={()=>{
-                              updBasket(info.Код, -1)
-                              setUpd(upd + 1);
-                          }}>
-                            <IonIcon slot="icon-only" icon={ removeCircle }></IonIcon>
-                          </IonButton>
-                          { Количество.toFixed() + " шт."} 
-                        </div>
-                        <div className="w-60 b-div-1">
-                          <IonButton class="i-but" fill="clear" onClick={()=>{
-                              updBasket(info.Код, 1)
-                              setUpd(upd + 1);
-                          }}>
-                            <IonIcon slot="icon-only" icon={ addCircleOutline }></IonIcon>
-                          </IonButton>
-                          { (info.Цена * Количество).toFixed(2) + " руб" }
-                        </div>
-                      </IonChip>
-                    </div>
-                  </div>
-                </IonCardTitle>
-              </IonCol>
+              <IonCol size="9" className="ml-0.5">
+                  <IonRow>
+                  <a><b>{info.Наименование}</b></a>
+                </IonRow>    
+                        <IonRow className="mt-4">
+                        <button  className="white-bg text-align orange-clr-fnt"> 
+                            { new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info.Цена * Количество)  }
+                        </button>
+                            <button className="bs-btn right" onClick={()=>{
+                                updBasket(info.Код, -1)
+                                setUpd(upd + 1);
+                            }}>
+                              <IonIcon  icon={ removeOutline }></IonIcon>
+                            </button>
+                            <button  className="f-16 white-bg text-align"
+                            > 
+                            <a >{ Количество.toFixed() + " шт."} </a>
+                            </button>
+                            <button className="bs-btn left"  onClick={()=>{
+                                updBasket(info.Код, 1)
+                                setUpd(upd + 1);
+                            }}>
+                              <IonIcon  icon={ addOutline }></IonIcon>
+                            </button>
+                        </IonRow>
+                        
+                </IonCol>
           </IonRow>
           </>
         
@@ -189,7 +196,9 @@ function  delBasket(Код){
       }  
     
       let items = <></>
-    
+
+      
+
       let sum = 0;
       for(let i = 0;i < basket.length;i++){
         sum = sum + basket[i].Сумма;
@@ -198,69 +207,118 @@ function  delBasket(Код){
           <BItem info={ basket[i] } />
         </>
       }
-    
+      
+      let delivery=0;
+      if(sum>=0 && sum<=999){
+        delivery=150;
+      }else if(sum>=1000 && sum<=1499) delivery=100
+      else if (sum>=1500 && sum<=1999) delivery=50
+      else delivery=0
+      let sumtotal=0;
+      sumtotal=sum+delivery;
+
       items = <>
-        <IonCard class="b-card f-14" >
-          <IonGrid className="w-100">
-            <IonRow className="m-row">
-  
-            </IonRow>
+        
+          <IonGrid className="w-100 header">
               <IonRow className="m-top">
-                <IonCol size="2">
-                  <IonButton fill="clear"
+                <IonCol size="1">
+                  <button 
                       onClick = {()=>{
                       Store.dispatch({type: "route", route: "back"})
-                    }}
+                    }} className="btn"
                   > 
                     <IonIcon icon = { arrowBackOutline } />
-                  </IonButton>
+                  </button>
                 </IonCol>
-                <IonCol size="3">
-                  <IonButton fill="clear" class="m-header">
-                    { "АсМаркет" }
-                  </IonButton>
+                <IonCol size="7" >
+                <button  className="m-header btn"
+> 
+                    <b><a >Корзина</a></b>
+                  </button>
                 </IonCol> 
-                <IonCol size="5" class="t-right">
-                  <IonButton fill="clear" class="m-header">
-                    { (basket.reduce(function(a, b){
-                        return a + b.Сумма;
-                        }, 0)).toFixed(2) + " руб"
-                    }
-                  </IonButton>
-                </IonCol> 
-                <IonCol size="2">
-                  <IonButton fill="clear" class="m-header"
+                
+                <IonCol size="4">
+                  <button  className="m-header btn"
                       onClick = {()=>{
                       Store.dispatch({type: "basket", basket: []})
                       setBasket([]);
                     }}
                   > 
-                    <IonIcon icon = { trashBinOutline } />
-                  </IonButton>
+                    <a >Очистить всё</a>
+                  </button>
                 </IonCol> 
               </IonRow>        
             </IonGrid>
-          <IonText  class="f-14 ml-1">Всего товаров { b_length.toString() + " шт" }</IonText>
-          <IonCardContent>
-            <div className="b-content w-100 h-80">
+         
+          <div className="content">
+            <div className="b-content w-100 h-80 ">
               { items }
             </div>
-          </IonCardContent>
-          <IonText class="f-14 ml-1">
-            Итого на сумму <b>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(sum)  }</b>
-          </IonText>
-  
-            <IonToolbar>
-              <IonButton
-                slot="end"
-                onClick={()=>{
-                  Store.dispatch({type: "route", route: "/page/order"})
-                }}
-              >
-                Сделать заказ
-              </IonButton>
-            </IonToolbar>
-        </IonCard>
+          </div>
+          <div className="footer">
+            <div className="footer2 ">
+              
+            <IonRow>
+              <IonCol size="6">
+                  <div className="left">
+                    <IonText class="f-16 ml-1">
+                      <a>Товаров на сумму </a>
+                    </IonText>
+                  </div>
+                </IonCol>
+                <IonCol size="6">
+                <div className="right ">
+                  
+                 <a>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(sum)  }</a>
+                </div>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="6">
+                <div className="left">
+                  <IonText class="f-16 ml-1">
+                    <a>Доставка </a>
+                  </IonText>
+                </div>
+              </IonCol>
+              <IonCol size="6">
+                <div className="right ">
+                 <a>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(delivery)  }</a>
+                </div>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="6">
+                <div className="left">
+                  <IonText class="f-18 ml-1">
+                    <b>Итого </b>
+                  </IonText>
+                </div>
+              </IonCol>
+              <IonCol size="6">
+                <div className="right orange-clr-fnt">
+                <IonText class="f-18 ml-1">
+                 <b>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(sumtotal)  }</b>
+                 </IonText>
+                </div>
+              </IonCol>
+            </IonRow>
+            </div>
+            
+            <IonRow>
+                <div className="btn">
+                  <button
+                    slot="end"
+                    onClick={()=>{
+                      Store.dispatch({type: "route", route: "/page/order"})
+                    }}  className="orange-clr-bg"
+                  >
+                    Оформить заказ
+                  </button>
+                </div>
+            </IonRow> 
+          </div>
+        
        </>
     
       return items

@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar , IonIcon} from '@ionic/react';
 import { useHistory, useParams } from 'react-router';
 import { Basket, BasketIcon } from '../components/Basket';
 import { Carousel } from '../components/Carousel';

@@ -1,5 +1,5 @@
 import { IonAlert, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCol
-  , IonIcon, IonItem, IonLabel, IonList, IonRow, IonSelect, IonSelectOption, IonText } from "@ionic/react";
+  , IonIcon, IonItem, IonLabel,IonGrid, IonList, IonRow, IonSelect, IonSelectOption, IonText,IonImg, IonContent } from "@ionic/react";
 import { Component } from "ionicons/dist/types/stencil-public-runtime";
 import { arrowBackOutline, basket, bicycleOutline, businessOutline, cardOutline, cashOutline, homeOutline, phonePortrait, storefrontOutline, timeOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
@@ -72,18 +72,28 @@ export function   Order( props ):JSX.Element {
 
     function Page1():JSX.Element {
       let elem = <>
-      <IonCard class="o-card">
-        <IonCardHeader> 
-          <IonButton fill="clear" 
+      
+      <IonCardHeader>
+          <div className="row">
+            
+          <IonCol size="1" >
+          <button 
             onClick={()=>{
               Store.dispatch({type: "route", route: "back"})
-            }}
+            }} className="btn2 left-align"
           >
-            <IonIcon slot="icon-only" icon={ arrowBackOutline }/>
-          </IonButton>
-            Оформление заказа 
-        </IonCardHeader>
-        <IonCardContent>
+            <IonIcon icon = { arrowBackOutline }  />
+          </button>
+          </IonCol>
+          
+          <IonCol size="9">
+            <div className="header-name"> 
+           <b>Оформление заказа </b> 
+           </div>
+            </IonCol>
+            </div>
+        </IonCardHeader >
+        <IonCardContent className="order-content">
           {/* Оплата */}
           <IonItem> 
             <IonIcon slot="start" icon={ cardOutline } />
@@ -154,7 +164,8 @@ export function   Order( props ):JSX.Element {
             </IonSelect>
           </IonItem>
           <div className = { dost ? "" : "hidden"}>
-            <IonLabel class="ml-15" >Адрес</IonLabel>
+            <div className="ml-2 mt-4"><IonLabel>Адрес</IonLabel></div>
+            
               <AddressSuggestions
                 token="23de02cd2b41dbb9951f8991a41b808f4398ec6e"
                 filterLocations ={ dict }
@@ -184,16 +195,16 @@ export function   Order( props ):JSX.Element {
               />
             </IonItem> */}
           </div>
-        <IonCardHeader> Итоги по заказу </IonCardHeader>   
+        <IonCardHeader className="header-name "><b> Итоги по заказу</b> </IonCardHeader>   
           <IonList class="f-14">
             <IonItem class="ml-1" lines="none">
-              <IonCardSubtitle>Сумма доставки </IonCardSubtitle>
+              <IonCardSubtitle>Доставка </IonCardSubtitle>
               <IonLabel slot="end" class="a-right">{ 
                   new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаДоставки)
               } </IonLabel>
             </IonItem>
             <IonItem class="ml-1" lines="none">
-              <IonCardSubtitle>Заказано на сумму </IonCardSubtitle>
+              <IonCardSubtitle>Сумма товаров </IonCardSubtitle>
               <IonLabel slot="end" class="a-right">{ 
                   new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info?.СуммаЗаказа) } </IonLabel>
             </IonItem>
@@ -204,22 +215,22 @@ export function   Order( props ):JSX.Element {
               } </IonLabel>
             </IonItem>
           </IonList>
-          <IonRow>
-            <IonCol></IonCol>
-            <IonCol></IonCol>
-            <IonCol>
-              <IonButton expand="block"
-                onClick = {()=>{
-                  Proov();
-                }}
-              >
-                { "Заказать" }
-              </IonButton>
-            </IonCol>
-          </IonRow>
-  
+          
         </IonCardContent>
-      </IonCard>
+        <div className="footer-order">
+         
+         <div className="btn">
+               <button
+                 slot="end"
+                 onClick={()=>{
+                   Proov();
+                 }}  className="orange-clr-bg"
+               >
+                 {"Оформить заказ"}
+               </button>
+             </div>
+     
+     </div>
       <IonAlert
             isOpen={ message !== "" }
             onDidDismiss={() => setMessage("")}
@@ -235,11 +246,16 @@ export function   Order( props ):JSX.Element {
 
     function Page2():JSX.Element {
       let elem = <>
-      <IonCard class="d-card">
-        <IonCardHeader> Заказ </IonCardHeader>
-        <IonCardContent>
-          <IonList>
-          <IonItem>
+      
+        <div className="order-image">
+              <img src = "assets/okimg.png" />
+        </div>
+        <div className="order-clr">
+          <div className="order-box">
+          </div>
+        </div>
+        
+        <IonItem class="mt-3">
               <IonItem lines="none">
                 <IonIcon slot="start" icon = { businessOutline }/>
                 <IonLabel position="stacked"> Организация </IonLabel>
@@ -263,7 +279,7 @@ export function   Order( props ):JSX.Element {
             <IonItem className={ info.Доставка === "Доставка" ? "hide" : ""}>
               <IonItem lines="none">
                 <IonIcon slot="start" icon = { storefrontOutline }/>
-                <IonLabel position="stacked"> Забирать с адреса </IonLabel>
+                <IonLabel position="stacked"> Адрес получения </IonLabel>
                 <IonText><b> { info.Адрес } </b></IonText>
               </IonItem>
             </IonItem>
@@ -292,27 +308,28 @@ export function   Order( props ):JSX.Element {
             </IonItem>
             <IonItem className={ info.Доставка === "Доставка" ? "" : "hide"}>
              <IonText class="f-14">
-               Ближайшее время с вами свяжутся и обговорят время доставки вашего заказа
+               В ближайшее время с Вами свяжутся и обговорят время доставки заказа
              </IonText>
             </IonItem>
-          </IonList>
-          <IonRow>
-            <IonCol></IonCol>
-            <IonCol></IonCol>
-            <IonCol>
-              <IonButton
-                onClick = {()=>{  
-                  Store.dispatch({type: "route", route: "/page/root"})
-                }}
-              > Закрыть
-              </IonButton>
-            </IonCol>
-          </IonRow>
-        </IonCardContent>
-  
-  
-      </IonCard>
-      
+       
+            
+          
+          
+            <div className="footer-order">
+         
+         <div className="btn">
+               <button
+                 slot="end"
+                 onClick={()=>{
+                   Store.dispatch({type: "route", route: "/page/root"})
+                 }}  className="orange-clr-bg"
+               >
+                 {"Закрыть"}
+               </button>
+             </div>
+          
+        </div>
+                
       </>
 
       return elem

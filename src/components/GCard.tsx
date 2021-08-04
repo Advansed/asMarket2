@@ -110,7 +110,7 @@ export function   GCard(props):JSX.Element {
                 addBasket(good, -1)
               }}
             >
-              <IonIcon icon = { removeOutline } />
+              -
             </button>
             </IonCol>
             <IonCol size="6">
@@ -132,7 +132,7 @@ export function   GCard(props):JSX.Element {
                 addBasket(good, 1)
               }}
             >
-              <IonIcon icon = { addOutline } />
+              +
             </button>
             </IonCol>
             </IonRow>
