@@ -155,7 +155,9 @@ function  delBasket(Код){
               
               </IonCol>
               <IonCol size="2">
-                  <IonImg id="a-margin" src={info.Картинка} class="b_img"/>
+              <div className="basketimg">
+                <img className="" src={  info.Картинка } alt="" />
+                </div>
               </IonCol>
               <IonCol size="9" className="ml-0.5">
                   <IonRow>
@@ -165,22 +167,27 @@ function  delBasket(Код){
                         <button  className="white-bg text-align orange-clr-fnt"> 
                             { new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info.Цена * Количество)  }
                         </button>
-                            <button className="bs-btn right" onClick={()=>{
-                                updBasket(info.Код, -1)
-                                setUpd(upd + 1);
-                            }}>
-                              <IonIcon  icon={ removeOutline }></IonIcon>
-                            </button>
+                            <IonChip outline color="right bs-btn" 
+                                  onClick = {()=>{
+                                    updBasket(info.Код, -1)
+                                    setUpd(upd + 1);
+                                  }}  >
+                              -
+                              </IonChip>
+                            
                             <button  className="f-16 white-bg text-align"
                             > 
                             <a >{ Количество.toFixed() + " шт."} </a>
                             </button>
-                            <button className="bs-btn left"  onClick={()=>{
-                                updBasket(info.Код, 1)
-                                setUpd(upd + 1);
-                            }}>
-                              <IonIcon  icon={ addOutline }></IonIcon>
-                            </button>
+                            <IonChip outline color="left bs-btn" 
+                                  onClick = {()=>{
+                                    updBasket(info.Код, 1)
+                                    setUpd(upd + 1);
+                                  }}  >
+                              +
+                              </IonChip>
+                            
+                            
                         </IonRow>
                         
                 </IonCol>
@@ -230,14 +237,14 @@ function  delBasket(Код){
                     <IonIcon icon = { arrowBackOutline } />
                   </button>
                 </IonCol>
-                <IonCol size="7" >
+                <IonCol size="6" >
                 <button  className="m-header btn"
 > 
                     <b><a >Корзина</a></b>
                   </button>
                 </IonCol> 
                 
-                <IonCol size="4">
+                <IonCol size="5">
                   <button  className="m-header btn"
                       onClick = {()=>{
                       Store.dispatch({type: "basket", basket: []})
@@ -257,36 +264,6 @@ function  delBasket(Код){
           </div>
           <div className="footer">
             <div className="footer2 ">
-              
-            <IonRow>
-              <IonCol size="6">
-                  <div className="left">
-                    <IonText class="f-16 ml-1">
-                      <a>Товаров на сумму </a>
-                    </IonText>
-                  </div>
-                </IonCol>
-                <IonCol size="6">
-                <div className="right ">
-                  
-                 <a>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(sum)  }</a>
-                </div>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol size="6">
-                <div className="left">
-                  <IonText class="f-16 ml-1">
-                    <a>Доставка </a>
-                  </IonText>
-                </div>
-              </IonCol>
-              <IonCol size="6">
-                <div className="right ">
-                 <a>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(delivery)  }</a>
-                </div>
-              </IonCol>
-            </IonRow>
             <IonRow>
               <IonCol size="6">
                 <div className="left">
@@ -298,7 +275,7 @@ function  delBasket(Код){
               <IonCol size="6">
                 <div className="right orange-clr-fnt">
                 <IonText class="f-18 ml-1">
-                 <b>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(sumtotal)  }</b>
+                 <b>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(sum)  }</b>
                  </IonText>
                 </div>
               </IonCol>

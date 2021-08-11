@@ -69,7 +69,7 @@ export function   GCard(props):JSX.Element {
               </IonButton>
               </div>
               <div className="f-card">
-                <img className="" src={  good.Картинка } alt="" width="70%"/>
+                <img className="" src={  good.Картинка } alt="" />
                 </div>
               
             
@@ -100,18 +100,18 @@ export function   GCard(props):JSX.Element {
               <div className="ml-2 mt-2 mr-1">
                 <IonRow>
                 <IonCol size="3">
-                  
-              <button className="gc-btn"
-              onClick={()=>{
-                info.Количество = info.Количество - 1 
-                if(info.Количество  < 0) info.Количество = 0
-                info.Сумма = info.Количество * info.Цена;
-                setInfo(info);setUpd(upd + 1);
-                addBasket(good, -1)
-              }}
-            >
-              -
-            </button>
+                <IonChip outline color="gc-btn" className="gc-btn"
+                    onClick = {()=>{
+                      info.Количество = info.Количество - 1 
+                      if(info.Количество  < 0) info.Количество = 0
+                      info.Сумма = info.Количество * info.Цена;
+                      setInfo(info);setUpd(upd + 1);
+                      addBasket(good, -1)
+                    }}  >
+                 -
+                </IonChip>
+                 
+              
             </IonCol>
             <IonCol size="6">
             <div className="w-100">
@@ -124,16 +124,17 @@ export function   GCard(props):JSX.Element {
             </div>
             </IonCol>
             <IonCol size="3">
-            <button className="gc-btn"
-              onClick={()=>{
-                info.Количество = info.Количество + 1 
-                info.Сумма = info.Количество * info.Цена;
-                setInfo(info);setUpd(upd + 1);
-                addBasket(good, 1)
-              }}
-            >
-              +
-            </button>
+            <IonChip outline color="gc-btn" className="gc-btn"
+                    onClick = {()=>{
+                      info.Количество = info.Количество + 1 
+                      info.Сумма = info.Количество * info.Цена;
+                      setInfo(info);setUpd(upd + 1);
+                      addBasket(good, 1)
+                    }}  >
+                 +
+                </IonChip>
+            
+            
             </IonCol>
             </IonRow>
             </div>
