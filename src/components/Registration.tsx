@@ -27,10 +27,12 @@ async function getSMS(phone) {
 
 export function Login(props): JSX.Element {
     let elem = <>
-        <IonCard>
-            <IonImg src = "assets/asMarket.jpg" />
-
-            <div className=" lg-input ml-1 mr-1 mb-2">
+            <div className="r-card">
+            <img src ="assets/22.png" />
+            </div>
+            <div className="r-circle"><div className="r-circle2"></div></div>
+            <div className="r-content">
+            <div className=" lg-input ">
                 <div>+7</div>
                 <MaskedInput 
                     mask={[ ' ','(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-',/\d/, /\d/]}
@@ -43,20 +45,23 @@ export function Login(props): JSX.Element {
                         
                 />
             </div>
-            <IonButton expand="block"
-                class = "ml-1 mr-1 mb-2"
-                onClick= {()=>{
-                    let login = Store.getState().login
-                    if(login === "") login = { Код: phone }
-                    else login.Код = phone
-                    Store.dispatch({type: "login", login: login})
-                    getSMS(phone)
-                }}
-            >
-                Получить СМС
-            </IonButton>
-            <IonToolbar></IonToolbar>
-        </IonCard>
+            
+            <div className="btn-r">
+                  <button
+                    slot="end"
+                    onClick={()=>{
+                        let login = Store.getState().login
+                        if(login === "") login = { Код: phone }
+                        else login.Код = phone
+                        Store.dispatch({type: "login", login: login})
+                        getSMS(phone)
+                    }}  className="orange-clr-bg"
+                  >
+                    Получить код
+                  </button>
+            </div>
+            </div>
+          
     </>
 
     return elem
@@ -67,11 +72,12 @@ export function SMS(props):JSX.Element {
     const [alert1, setAlert1] = useState(false)
     const [alert2, setAlert2] = useState(false)
     let elem = <>
-        <IonCard>
-            <IonImg src = "assets/asMarket.jpg"/>
-            <div className = "a-center f-27">
-                <IonText> Введите СМС </IonText>
+            <div className="r-card">
+                 <img src = "assets/123.png"/>
             </div>
+            <div className="r-circle3"><div className="r-circle2"></div></div>
+            <div className="r-content">
+
             <div className="lg-sms-box">
                 <div className="lg-div-1">
                     <span></span>
@@ -85,10 +91,10 @@ export function SMS(props):JSX.Element {
                     onIonChange = {(e)=>{
                         let val = e.detail.value;
                         switch (val?.length) {
-                            case 0:     setTires("----");break;       
-                            case 1:     setTires("---");break;       
-                            case 2:     setTires("--");break;       
-                            case 3:     setTires("-");break;       
+                            case 0:     setTires("");break;       
+                            case 1:     setTires("");break;       
+                            case 2:     setTires("");break;       
+                            case 3:     setTires("");break;       
                             case 4:     setTires("");break;       
                             default:    setTires("----");break;       
                         }
@@ -107,21 +113,17 @@ export function SMS(props):JSX.Element {
                     }}
                     />
             </div>
-            <div>
-                <IonButton
-                    class = "ml-1 mr-1 mb-1"
-                    expand = "block"
-                    onClick = {()=>{
+            <div className="btn-r">
+                  <button
+                    slot="end"
+                    onClick={()=>{
                         getSMS(phone)
-                    }}
-                >
-                    Получить СМС еще раз
-                </IonButton>
+                    }}  className="orange-clr-bg"
+                  >
+                    Отправить код повторно
+                  </button>
             </div>
-            <IonToolbar>
-
-            </IonToolbar>
-        </IonCard>
+            </div>
         <IonAlert
           isOpen={ alert1 }
           onDidDismiss={() => setAlert1(false)}
@@ -135,8 +137,7 @@ export function SMS(props):JSX.Element {
           onDidDismiss={() => setAlert2(false)}
           cssClass='my-custom-class'
           header={'Ошибка'}
-          subHeader={'СМС'}
-          message={'неправильный СМС'}
+          message={'Неверный код'}
           buttons={['Ок']}
         />
     </>

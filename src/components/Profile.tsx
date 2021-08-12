@@ -58,7 +58,7 @@ export function   Profile():JSX.Element {
     }
   
     let elem = <>
-      <IonCard class="pr-card">
+      
         <IonIcon icon = { arrowBackOutline } 
             class= "back ml-1 mt-1"
             onClick = {()=>{
@@ -141,7 +141,7 @@ export function   Profile():JSX.Element {
             </IonRow>
           </div>
         </IonCardContent>
-      </IonCard>  
+       
     </>
   
     return elem;
