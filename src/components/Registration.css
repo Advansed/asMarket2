@@ -102,8 +102,7 @@
     background-color: white ;
     margin-top: 0 auto;
     width: 100%;
-    bottom: 1.5em;
-    position: absolute;
+    padding-top: 1em;
     text-align: center;
 }
 .r-content{
@@ -115,6 +114,7 @@
 }
 .r-clr{
     color: #FF8C00;
+    width: 80% !important;
 }
 @font-face {
     font-family: 'AeroportMono';

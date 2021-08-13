@@ -59,29 +59,38 @@ export function   Profile():JSX.Element {
   
     let elem = <>
       
-        <IonIcon icon = { arrowBackOutline } 
-            class= "back ml-1 mt-1"
-            onClick = {()=>{
-              Store.dispatch({type: "route", route: "back"})
-            }}
-          />          
+        <IonRow>
+          <IonCol size="3">
+            <IonIcon icon = { arrowBackOutline } 
+                class= "back ml-1 mt-1 pr-btn2"
+                onClick = {()=>{
+                  Store.dispatch({type: "route", route: "back"})
+                }}
+              /> 
+          </IonCol>
+          <IonCol size="7">
+            <div className="pr-header">
+                <IonText><h3><b>Профиль</b></h3></IonText>
+                </div>
+          </IonCol>
+         </IonRow>        
         <IonLoading isOpen = { load } message = "Подождите" />
         <IonCardContent>
           <div className="pr-container">
-            <IonRow>
-              <IonCol size= "3"></IonCol>
-              <IonCol size= "6">
-                <img className="pr-img" src = { login.image } alt="" />
-              </IonCol>
-              <IonCol size="3"></IonCol>
-            </IonRow>
-            <IonButton class="pr-btn" fill="clear"
-              onClick = {()=>{
-                getFoto()    
-              }}
-            >
-              <IonIcon slot = "icon-only" icon={ cameraOutline }/>
-            </IonButton>
+            <div className="p-card">
+                <img src = { login.image } alt="" />
+                <div className="btn-add-photo">
+                    <IonButton className="pr-btn" fill="clear"
+                      onClick = {()=>{
+                        getFoto()    
+                      }}
+                    >
+                      <IonIcon slot = "icon-only" icon={ cameraOutline }/>
+                    </IonButton>
+                    
+                </div>
+            </div>
+            
             <IonList class="ml-2 mr-2">
               <IonItem>
                 <IonInput
@@ -96,7 +105,7 @@ export function   Profile():JSX.Element {
               </IonItem>
               <IonItem>
                 <IonInput
-                  placeholder = "эл. почта"
+                  placeholder = "Эл. почта"
                   onIonChange={(e)=>{
                     Store.dispatch({type: "login", email: e.detail.value as string})
                     login.email = e.detail.value as string
@@ -118,26 +127,30 @@ export function   Profile():JSX.Element {
               </IonItem>
             </IonList>
             <IonRow>
-              <IonCol>
-                <IonButton class="ml-2 mr-2" expand="block"
-                  onClick={()=>{
-//                    saveProfile()
-                    Store.dispatch({type: "route", route: "/page/root"})
-                  }}
-                >
-                  Выход
-                </IonButton>
-              </IonCol>
-              <IonCol>
-                <IonButton class="ml-2 mr-2" expand="block"
-                  onClick={()=>{
-                    saveProfile()
-                    Store.dispatch({type: "route", route: "/page/root"})
-                  }}
-                >
-                  Сохранить
-                </IonButton>
-              </IonCol>
+            <div className="btn-r">
+                  <button
+                    slot="end"
+                    onClick={()=>{
+                      saveProfile()
+                      Store.dispatch({type: "route", route: "/page/root"})
+                    }}  className="orange-clr-bg"
+                  >
+                    Сохранить
+                  </button>
+            </div>
+            <div className="btn-r">
+                  <button
+                    slot="end"
+                    onClick={()=>{
+                      saveProfile()
+                      Store.dispatch({type: "route", route: "/page/root"})
+                    }}  className="orange-clr-bg"
+                  >
+                    Выход
+                  </button>
+            </div>
+            
+
             </IonRow>
           </div>
         </IonCardContent>
