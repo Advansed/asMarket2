@@ -1,21 +1,35 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCol, IonIcon, IonItem, IonRow } from "@ionic/react"
+import { IonCard, IonCardContent, IonCardHeader, IonCol, IonIcon, IonLoading, IonRow } from "@ionic/react"
 import { useEffect, useState } from "react"
-import { Store } from "../pages/Store"
+import { getData, Store } from "../pages/Store"
 import QRCode from "react-qr-code";
 import { arrowBackOutline } from "ionicons/icons";
 
 export function Orders(props):JSX.Element{
     const [info, setInfo] = useState<any>([])
+    const [load, setLoad] = useState(false)
+
+    async function getOrders(){
+        setLoad(true);
+        let login = Store.getState().login;
+        let res = await  getData("method", {
+            method: "Заказы",
+            phone: login.code,
+        })
+
+        setInfo(res);
+
+        setLoad(false);
+    }
 
     useEffect(()=>{
-        setInfo(Store.getState().orders)
+        getOrders()
     }, [])
     let elem = <></>
 
     for(let i = 0;i < info.length;i++){
         elem = <>
             { elem }
-            <IonCard class="f-card">
+            <IonCard class="о-card">
                 <IonCardHeader>
                 <IonRow>
                     <IonCol size="8"> <b>{ info[i].Номер }</b> { info[i].Дата } </IonCol>
@@ -33,7 +47,7 @@ export function Orders(props):JSX.Element{
                     </IonCol>
                     <IonCol size="8">
                     <IonRow>
-                        <IonCol>{ info[i].Фирма }</IonCol>
+                        <IonCol>{ info[i].МетодДоставки }</IonCol>
                     </IonRow>
                     <IonRow>
                         <IonCol>{ info[i].Доставка } <b>{ info[i].СуммаДокумента } руб</b></IonCol>
@@ -48,6 +62,7 @@ export function Orders(props):JSX.Element{
         </>
     }
     return <>
+    <IonLoading isOpen = { load } message = "Подождите..." />
     <div>
         <div>
             <IonIcon icon = { arrowBackOutline } 
@@ -63,3 +78,4 @@ export function Orders(props):JSX.Element{
     </div>
     </>
 }
+

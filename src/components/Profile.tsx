@@ -167,7 +167,7 @@ export function   Options():JSX.Element {
   function          Person():JSX.Element{
       let login = Store.getState().login
       let elem = <>
-        <IonCard class="f-card">
+        <IonCard class="pr-card">
           <IonIcon icon = { arrowBackOutline } 
             class= "back ml-1 mt-1"
             onClick = {()=>{
@@ -177,7 +177,7 @@ export function   Options():JSX.Element {
           <IonCardContent>
             <IonItem class="mt-1 mb-1" detail
               onClick = {()=>{
-                Store.dispatch({type: "route", route: "/menu/profile"})
+                Store.dispatch({type: "route", route: "/page/profile"})
               }}
             >
               <IonItem lines="none">
@@ -208,7 +208,7 @@ export function   Options():JSX.Element {
             </IonItem>
             <IonItem class="mt-1 mb-1 op-item" lines = "none" detail
               onClick={()=>{
-                Store.dispatch({type: "route", route: "/menu/orders"})
+                Store.dispatch({type: "route", route: "/page/orders"})
               }}
             >
                 <IonThumbnail class="op-thumb" color="blue" slot="start">
@@ -228,27 +228,27 @@ export function   Options():JSX.Element {
             </IonItem>
             <IonItem class="mt-1 mb-1 op-item" lines = "none" detail
               onClick={()=>{
-                //Store.dispatch({type: "route", route: "/menu/policy"})
+                Store.dispatch({type: "route", route: "/page/info"})
               }}
             >
                 <IonThumbnail class="op-thumb2" color="blue" slot="start">
                   <IonIcon class= "op-icon" icon = { shieldCheckmarkOutline }/>
                 </IonThumbnail>
-                <IonText> Политика конфиденциальности </IonText>
+                <IonText> Условия работы </IonText>
             </IonItem>
             <IonItem class="mt-1 mb-1 op-item" lines = "none" detail
                onClick={()=>{
-                Store.dispatch({type: "route", route: "/menu/contacts"})
+                Store.dispatch({type: "route", route: "/page/contacts"})
               }}             
             >
                 <IonThumbnail class="op-thumb3" color="blue" slot="start">
                   <IonIcon class= "op-icon" icon = { headsetOutline }/>
                 </IonThumbnail>
-                <IonText> Служба поддержки </IonText>
+                <IonText> Контакты </IonText>
             </IonItem>
             <IonItem class="mt-1 mb-1 op-item" lines = "none" detail
                onClick={()=>{
-                Store.dispatch({type: "route", route: "/menu/delinfo"})
+                Store.dispatch({type: "route", route: "/page/about"})
               }}             
             >
                 <IonThumbnail class="op-thumb" color="blue" slot="start">

@@ -1,5 +1,4 @@
 import { IonAlert, IonButton, IonCard, IonImg, IonInput, IonText, IonToolbar } from "@ionic/react";
-import { logoSoundcloud } from "ionicons/icons";
 import { useState } from "react";
 import MaskedInput from "../mask/reactTextMask";
 import { getData1C, Store } from "../pages/Store";
@@ -16,9 +15,7 @@ async function getSMS(phone) {
 
     console.log(res)
     if(res.СМС !== undefined) {
-        if(login === "") login = { SMS: res.СМС }
-        else login.СМС = res.СМС
-        Store.dispatch({type: "login", login: login})
+        Store.dispatch({type: "login", SMS: res.СМС })
         Store.dispatch({type: "route", route: "/page/SMS"})
     }
 
@@ -32,7 +29,7 @@ export function Login(props): JSX.Element {
             </div>
             <div className="r-circle"><div className="r-circle2"></div></div>
             <div className="r-content">
-            <div className=" lg-input ">
+            <div className="lg-input">
                 <div>+7</div>
                 <MaskedInput 
                     mask={[ ' ','(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-',/\d/, /\d/]}
@@ -79,10 +76,12 @@ export function SMS(props):JSX.Element {
             <div className="r-content">
 
             <div className="lg-sms-box">
+
                 <div className="lg-div-1">
                     <span></span>
                     { tires }
                 </div>
+
                 <IonInput
                     className = "lg-sms-input"
                     type = "text"
@@ -91,20 +90,20 @@ export function SMS(props):JSX.Element {
                     onIonChange = {(e)=>{
                         let val = e.detail.value;
                         switch (val?.length) {
-                            case 0:     setTires("");break;       
-                            case 1:     setTires("");break;       
-                            case 2:     setTires("");break;       
-                            case 3:     setTires("");break;       
+                            case 0:     setTires("----");break;       
+                            case 1:     setTires("---");break;       
+                            case 2:     setTires("--");break;       
+                            case 3:     setTires("-");break;       
                             case 4:     setTires("");break;       
                             default:    setTires("----");break;       
                         }
                         if(val?.length === 4) {
-                            let SMS = Store.getState().login.СМС
+                            let SMS = Store.getState().login.SMS
                             console.log(Store.getState().login)
                             if(SMS === val) {
                                 setAlert1(true)    
                                 Store.dispatch({type: "auth", auth: true})
-                                Store.dispatch({type: "route", route: "/page/profile"})
+                                Store.dispatch({type: "route", route: "/page/options"})
                                 localStorage.setItem("marketAs.login", phone)
                             } else 
                                 setAlert2(true)

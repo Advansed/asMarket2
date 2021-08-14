@@ -13,10 +13,10 @@
     border: 1px solid #FF8C00;
     height: 70px !important;
 }
-
 .lg-sms-box {
+
     display: flex;
-    width: 85%;
+    width: 15em;
     position: relative;
     margin: 0 auto;
     margin-bottom: 1em;
@@ -25,19 +25,20 @@
     height:60px;
     
 }
-
 .lg-div-1 {
+    display: flex;
     position: absolute;
     width: 100%;
+    left: -0.5em;
     height: 2em;
-    /* margin-left: 0.5em; */
+    /* margin-left: -1em; */
     letter-spacing: 1em;
     justify-content: space-between;
     font-size: 30px;
     padding-left: 1em;
-    text-align: center;
+    /* text-align: center; */
     font-family: monospace;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     padding-top: 0.2em;
     
 }
@@ -50,9 +51,9 @@
     top: 0;
     left: 0;
     letter-spacing: 1em;
-    font-size: 20px;
+    font-size: 30px;
     font-family: monospace;
-    text-align: center;
+    /* text-align: center; */
     padding-top: 1em;
 
 }

@@ -81,7 +81,7 @@ const Menu: React.FC = () => {
                       expand= "block"
                       onClick = {()=>{
                         if(Store.getState().auth)
-                          Store.dispatch({type: "route", route: "/page/profile"})
+                          Store.dispatch({type: "route", route: "/page/options"})
                         else
                           Store.dispatch({type: "route", route: "/page/login"})
                       }}

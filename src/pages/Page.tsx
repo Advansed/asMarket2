@@ -5,8 +5,10 @@ import { Carousel } from '../components/Carousel';
 import { Categories } from '../components/Categories';
 import { GCard } from '../components/GCard';
 import { Goods } from '../components/Goods';
+import { InfoPage1, InfoPage2 } from '../components/Infopage';
 import { Order } from '../components/Order';
-import { Profile } from '../components/Profile';
+import { Orders } from '../components/Orders';
+import { Options, Profile } from '../components/Profile';
 import { Login, SMS } from '../components/Registration';
 import './Page.css';
 import { Store } from './Store';
@@ -27,7 +29,13 @@ const Page: React.FC = () => {
   Store.subscribe({num: 1, type: "route", func: ()=>{ 
   let route = Store.getState().route;
   switch( route ) {
-    case "back": hust.goBack(); break
+    case "back": {
+        if(hust.location.pathname === "/page/options"){
+          Store.dispatch({type: "route", route: "/page/root"})
+        } else 
+          hust.goBack(); 
+
+      }; break
     case "forward": hust.goForward(); break;
     default: hust.push( route );
   }
@@ -59,10 +67,22 @@ const Page: React.FC = () => {
       case "SMS": elem = <>
         <SMS />
       </>; break
-      case "profile": elem = <>
-        <Profile />
+      case "options": elem = <>
+      <Options />
       </>; break
-  default: elem = <></>;
+      case "profile": elem = <>
+      <Profile />
+      </>; break
+      case "orders": elem = <>
+      <Orders />
+      </>; break
+      case "contacts": elem = <>
+      <InfoPage1 />
+      </>; break
+      case "info": elem = <>
+      <InfoPage2 />
+      </>; break
+      default: elem = <></>;
     }
     return elem
   }
