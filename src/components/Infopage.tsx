@@ -5,30 +5,20 @@ import './Infopage.css'
 
 export function InfoPage1(props):JSX.Element {
     let elem = <>
-        <div className="ip-div-1">
-            <div>
-                <IonIcon icon = { arrowBackOutline } 
-                    class = "w-2 h-2"
-                    onClick= {()=>{
-                        Store.dispatch({type: "route", route: "back"})
-                    }}
-                />
+            <div className="info-header">
+                <a><b>Наши контакты</b></a>
             </div>
-            <div>
-                <IonText class="f-24"><b>Наши контакты</b></IonText>
-            </div>
-            <div className="ip-div-2 f-18">
+            <div className="info-content">
                 <p>
-                    Свои вопросы, пожелания или жалобы вы можете адресовать к нам по следующим контактным данным:						
+                    Вопросы, пожелания или жалобы Вы можете адресовать нам по следующим контактным данным:						
                 </p>
                 <div className="mt-1">
-                    Телефон: +7(777)777-77-77	
+                    <b>Телефон:</b> +7(777)777-77-77	
                 </div>
                 <div  className="mt-1">
-                    email: asmrkt@mail.ru
+                    <b>E-mail:</b> asmrkt@mail.ru
                 </div>
             </div>
-        </div>
     </>
 
     return elem
@@ -37,50 +27,43 @@ export function InfoPage1(props):JSX.Element {
 
 export function InfoPage2(props):JSX.Element {
     let elem = <>
-        <div className="ip-div-1">
-            <div>
-                <IonIcon icon = { arrowBackOutline } 
-                    class = "w-2 h-2"
-                    onClick= {()=>{
-                        Store.dispatch({type: "route", route: "back"})
-                    }}
-                />
+        
+            <div className="info-header">
+                <a><b>Помощь</b></a>
             </div>
-            <div className="f-14">
-                <h4>График работы</h4>		
-            </div>
-            <div className="ip-div-2 f-18 ml-2">
-                <div>
-                    понедельник – пятница: 10:00 – 19:00		
+            <details>
+                <summary>График работы</summary>
+                <div className="info-content2">
+                <p>Понедельник - пятница: 9:00 - 21:00</p>
+                <p>Суббота: 10:00 - 17:00</p>
+                <p>Воскресенье: выходной</p>
                 </div>
-                <div>
-                    суббота: 10:00 – 17:00		
-                </div>
-                <div>
-                    воскресенье: выходной день		
-                </div>
-            </div>
-            <div className="f-14">
-                <p>
-                    <h4>Обработка заказов:</h4>						
-                </p>
+            </details>
+
+            <details>
+                <summary><b>Обработка заказов</b></summary>
+                <div className="info-content2">
                 <p>
                     Заказы принимаются круглосуточно, но обрабатываются в рабочее время менеджера.						
                 </p>
                 <p>
                     После оформления заказа с вами свяжется менеджера для уточнения деталей и подтверждения заказа.						
                 </p>
-                        
-                <p>
-                    <h4>Минимальная сумма заказа:</h4>						
-                </p>
+                </div>
+            </details>
+
+            <details>
+                <summary><b>Минимальная сумма заказа</b></summary>
+                <div className="info-content2">
                 <p>
                 Минимальная сумма заказа для бесплатной доставки курьером по г. Якутск составляет 1000 рублей. При самовывозе минимальная сумма заказа не ограничена.						
                 </p>
+                </div>
+            </details>
 
-                <p>                     
-                    <h4>Оплата заказа:</h4>						
-                </p>
+            <details>
+                <summary><b>Оплата заказа</b></summary>
+                <div className="info-content2">
                 <p>
                 Оплата наличными или банковской картой при получении заказа. К оплате принимаются карты Visa, Mastercard, Maestro, МИР.						
                 </p>
@@ -96,10 +79,12 @@ export function InfoPage2(props):JSX.Element {
                 <p>
                 Для получении оплаченного заказа обязательно наличие у получателя документа удостоверяющего личность и доверенности или печати организации.						
                 </p>
+                </div>
+            </details>
 
-                <p>                      
-                    <h4>Доставка:</h4>						
-                </p>
+            <details>
+                <summary><b>Доставка</b></summary>
+                <div className="info-content2">
                 <p>
                 Служба доставки интернет-магазина «АсМаркет» выполнит доставку выбранного вами товара:						
                 </p>
@@ -110,9 +95,12 @@ export function InfoPage2(props):JSX.Element {
                 - если заказ оформлен после 16:00, то мы доставим его на Ваш адрес через 1 рабочий день с 10 до 19:00.						
                 </p>
                 <p>
-                Доставка осуществляется только в приделах указанной зоны.						
+                Доставка осуществляется только в прeделах указанной зоны.						
                 </p>            
-            </div>
+                </div>
+            </details>
+
+
             {/* <iframe 
                 src="https://yandex.ru/map-widget/v1/?um=constructor%3A7737a696313c546289bcee3d00294f36e52d07aa4084cfff1f9c4de08f127d47&amp;source=constructor" 
                 width="100%" 
@@ -120,7 +108,7 @@ export function InfoPage2(props):JSX.Element {
                 // frameborder="0"
             >
             </iframe>													 */}
-        </div>
+        
     </>
     return elem
 }

@@ -1,4 +1,4 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCol, IonIcon, IonLoading, IonRow } from "@ionic/react"
+import { IonCard, IonCardContent, IonCardHeader, IonCol, IonIcon, IonLoading, IonRow,IonText } from "@ionic/react"
 import { useEffect, useState } from "react"
 import { getData, Store } from "../pages/Store"
 import QRCode from "react-qr-code";
@@ -29,6 +29,7 @@ export function Orders(props):JSX.Element{
     for(let i = 0;i < info.length;i++){
         elem = <>
             { elem }
+            
             <IonCard class="о-card">
                 <IonCardHeader>
                 <IonRow>
@@ -64,14 +65,21 @@ export function Orders(props):JSX.Element{
     return <>
     <IonLoading isOpen = { load } message = "Подождите..." />
     <div>
-        <div>
-            <IonIcon icon = { arrowBackOutline } 
-                class= "back ml-1 mt-1"
-                onClick = {()=>{
-                Store.dispatch({type: "route", route: "back"})
-                }}
-            />  
-        </div>
+        <IonRow>
+            <IonCol size="3">
+                <IonIcon icon = { arrowBackOutline } 
+                    class= "back ml-1 mt-1 pr-btn2"
+                    onClick = {()=>{
+                    Store.dispatch({type: "route", route: "back"})
+                    }}
+                /> 
+            </IonCol>
+            <IonCol size="7">
+                <div className="pr-header">
+                    <IonText><h3><b>Мои заказы</b></h3></IonText>
+                    </div>
+            </IonCol>
+            </IonRow> 
         <div>
             { elem }
         </div>

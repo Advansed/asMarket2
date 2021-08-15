@@ -20,6 +20,9 @@
         width:      1.8em;
         height:     1.8em;
     }
+    .op-header{
+        background-color: #FF8C00 !important;
+    }
     .op-text-2 {
         font:       13px/15px Arial;
     } 
@@ -150,25 +153,25 @@
     .op-thumb {
         height: 2em;
         width: 2em;
-        background-color:blue;
+        background-color:#FF8C00;
         border-radius: 15%;
     }
     .op-thumb1 {
         height: 2em;
         width: 2em;
-        background-color:red;
+        background-color:#FF8C00;
         border-radius: 15%;
     }
     .op-thumb2 {
         height: 2em;
         width: 2em;
-        background-color:green;
+        background-color:#FF8C00;
         border-radius: 15%;
     }
     .op-thumb3 {
         height: 2em;
         width: 2em;
-        background-color:orange;
+        background-color:#FF8C00;
         border-radius: 15%;
     }
     .op-icon {

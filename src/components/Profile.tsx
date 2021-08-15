@@ -5,7 +5,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
 //import { Plugins, CameraResultType } from '@capacitor/core';
 import { IonAlert, IonAvatar, IonButton, IonCard, IonCardContent, IonCardHeader, IonCol, IonGrid, IonIcon, IonInput, IonItem
     , IonList, IonLoading, IonRow, IonText, IonThumbnail } from "@ionic/react";
-import { arrowBackOutline, cameraOutline, exitOutline, headsetOutline, homeOutline, informationCircleOutline, mailUnreadOutline, personCircleOutline, shieldCheckmarkOutline, timerOutline } from "ionicons/icons";
+import { arrowBackOutline, bagHandleOutline, cameraOutline, exitOutline, headsetOutline, homeOutline, informationCircleOutline, mailUnreadOutline, personCircleOutline, shieldCheckmarkOutline, timerOutline } from "ionicons/icons";
 import './Profile.css'
 
 defineCustomElements(window)
@@ -91,7 +91,7 @@ export function   Profile():JSX.Element {
                 </div>
             </div>
             
-            <IonList class="ml-2 mr-2">
+            <IonList class="ml-1 mr-2">
               <IonItem>
                 <IonInput
                   placeholder = "ФИО, псевдоним"
@@ -142,6 +142,16 @@ export function   Profile():JSX.Element {
                   <button
                     slot="end"
                     onClick={()=>{
+                      Store.dispatch({type: "route", route: "/page/orders"})
+                    }}  className="orange-clr-bg"
+                  >
+                    Мои заказы
+                  </button>
+            </div>
+            <div className="btn-r">
+                  <button
+                    slot="end"
+                    onClick={()=>{
                       saveProfile()
                       Store.dispatch({type: "route", route: "/page/root"})
                     }}  className="orange-clr-bg"
@@ -167,15 +177,9 @@ export function   Options():JSX.Element {
   function          Person():JSX.Element{
       let login = Store.getState().login
       let elem = <>
-        <IonCard class="pr-card">
-          <IonIcon icon = { arrowBackOutline } 
-            class= "back ml-1 mt-1"
-            onClick = {()=>{
-              Store.dispatch({type: "route", route: "back"})
-            }}
-          />  
+        
           <IonCardContent>
-            <IonItem class="mt-1 mb-1" detail
+            <IonItem class=" mb-1" detail lines="full"
               onClick = {()=>{
                 Store.dispatch({type: "route", route: "/page/profile"})
               }}
@@ -212,7 +216,7 @@ export function   Options():JSX.Element {
               }}
             >
                 <IonThumbnail class="op-thumb" color="blue" slot="start">
-                  <IonIcon class= "op-icon" icon = { timerOutline }/>
+                  <IonIcon class= "op-icon" icon = { bagHandleOutline }/>
                 </IonThumbnail>
                 <IonText> Мои заказы </IonText>
             </IonItem>
@@ -234,7 +238,7 @@ export function   Options():JSX.Element {
                 <IonThumbnail class="op-thumb2" color="blue" slot="start">
                   <IonIcon class= "op-icon" icon = { shieldCheckmarkOutline }/>
                 </IonThumbnail>
-                <IonText> Условия работы </IonText>
+                <IonText> Ответы на вопросы </IonText>
             </IonItem>
             <IonItem class="mt-1 mb-1 op-item" lines = "none" detail
                onClick={()=>{
@@ -281,7 +285,7 @@ export function   Options():JSX.Element {
                 <IonText> Выйти </IonText>
             </IonItem>
           </IonCardContent>
-        </IonCard>
+        
     </>;
     return elem
 }
