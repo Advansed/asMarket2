@@ -1,7 +1,7 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar , IonIcon} from '@ionic/react';
 import { useHistory, useParams } from 'react-router';
 import { Basket, BasketIcon } from '../components/Basket';
-import { Carousel } from '../components/Carousel';
+import { Action, Carousel } from '../components/Carousel';
 import { Categories } from '../components/Categories';
 import { GCard } from '../components/GCard';
 import { Goods } from '../components/Goods';
@@ -81,6 +81,9 @@ const Page: React.FC = () => {
       </>; break
       case "info": elem = <>
       <InfoPage2 />
+      </>; break
+      case "action": elem = <>
+      <Action />
       </>; break
       default: elem = <></>;
     }
