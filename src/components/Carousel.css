@@ -8,20 +8,23 @@
     align-items: center;
     
 }
+.box{
+
+    width: 90% !important;
+    height: 25% !important;
+    margin: 0 auto;
+    margin-top: 0.5em;
+}
 .slider{
     display: flex;
     width: 100% !important;
-    height: 25% ;
+    height: 100% !important;
     border-radius: 15px;
-    overflow: hidden;
-    margin-top: 0.5em;
     margin-bottom: 0.5em;
+    margin-right: 1em;
+    
 }
-.slides{
-    width: 500%;
-    height: 100%;
-    display: flex;
-}
+
 .slides input{
     display: none;
 }
@@ -30,89 +33,16 @@
     transition: 2s;
 }
 .sl-img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-.slidetext{
-    position: absolute;
-    width: 40%;
-    display: flex;
-    left: 12%;
-    color: white;
-    text-align: left;
-    margin-top: -40%;
-   
-}
-.slidetext h2{
-    font-size: 20px !important;
-    font-weight: 800 !important; 
-}
-.slidetext a{
-    font-size: 18px !important;
-    font-weight: 400 !important; 
-}
-
-.navigation-manual{
-    position: absolute !important;
-    width: 90%;
-    margin-top: -25px;
-    display: flex;
-    justify-content: center;
+    width: 100% !important;
+    object-fit: cover;
+    margin-top: -25%;
 
 }
-.manual-btn:not(:last-child){
-    margin-right: 40px;
-}
-.manual-btn:hover{
-    background-color:#000000 ;
-}
-.manual-btn{
-    border: 2px solid #000000;
-    padding: 2px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 1s;
-}
-#radio1:checked ~ .first{
-    margin-left: 0;
-}
-#radio2:checked ~ .first{
-    margin-left: -20%;
-}
-#radio3:checked ~ .first{
-    margin-left: -40%;
-}
-#radio4:checked ~ .first{
-    margin-left: -60%;
-}
-.navigation-auto{
-    position: absolute;
-    display: flex;
-    width: 90%;
-    justify-content: center;
-    margin-top:-25px;
-}
-.navigation-auto div{
-    border: 2px solid #000000;
-    padding: 2px;
-    border-radius: 10px;
-    transition: 1s;
-}
-.navigation-auto div:not(:last-child){
-    margin-right: 40px;
-}
-#radio1:checked ~ .navigation-auto .auto-btn1{
-    background-color: #000000;
-}
-#radio2:checked ~ .navigation-auto .auto-btn2{
-    background-color: #000000;
-}
-#radio3:checked ~ .navigation-auto .auto-btn3{
-    background-color: #000000;
-}
-#radio4:checked ~ .navigation-auto .auto-btn4{
-    background-color: #000000;
+
+
+ion-slide{
+    width: 100% !important;
+    min-height: 150% !important;
 }
 @media screen and (max-width: 2900px) {
     .cr-content {

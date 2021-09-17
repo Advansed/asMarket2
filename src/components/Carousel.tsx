@@ -37,6 +37,7 @@ export function Carousel():JSX.Element {
 
     function Slides():JSX.Element {
         let elem = <>
+        <div className="box">
             <IonSlides pager={ true } options={ slideOpts }
                 class="slider"
                 onIonSlidesDidLoad = {(e)=>{
@@ -46,7 +47,7 @@ export function Carousel():JSX.Element {
             >
                 { info.map((e, ind) =>{ 
                     return <>
-                        <IonSlide translate = "yes" key = { ind } 
+                        <IonSlide translate = "yes" key = { ind } className="slides"
                             onClick = {()=>{
                                 Store.dispatch({type: "action", action: e})
                                 Store.dispatch({type: "route", route: "/page/action"})
@@ -59,6 +60,7 @@ export function Carousel():JSX.Element {
                     </>
                 })}
             </IonSlides>
+            </div>
         </>
         return elem
     }

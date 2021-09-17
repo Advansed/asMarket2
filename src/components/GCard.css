@@ -68,6 +68,9 @@
     .gc-text-2 {
         line-height: 3;
         font: 18px/22px Sans;
+        margin-left: 5%;
+        margin-right: 5%;
+        text-align: justify;
     }
     .gc-btn{
         border-color: 1px solid #FF8C00 !important;

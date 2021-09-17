@@ -91,7 +91,7 @@ const Page: React.FC = () => {
   }
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader >
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
