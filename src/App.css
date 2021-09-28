@@ -219,7 +219,9 @@
     --b_color: rgb(0, 100, 255);
     --b_color_l: rgb(0, 100, 255);
 }
-
+.bgcolormain{
+    background-color: white;
+}
 ion-button {
     --text-decoration: none; 
     text-transform: none;

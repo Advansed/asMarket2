@@ -147,7 +147,7 @@ function  delBasket(Код){
             <IonRow class="r-underline ">
               <IonCol size="1">
                     
-                    <IonIcon icon={ closeOutline } 
+                    <IonIcon icon={ closeOutline } className="b-size-btnx" 
                         onClick={()=>{
                           delBasket(info.Код); setUpd(upd + 1);
                         }} 
@@ -161,32 +161,32 @@ function  delBasket(Код){
               </IonCol>
               <IonCol size="9" className="ml-0.5">
                   <IonRow>
-                  <a><b>{info.Наименование}</b></a>
+                  <h1 className="basketnameofgood"><b>{info.Наименование}</b></h1>
                 </IonRow>    
-                        <IonRow className="mt-4">
-                        <button  className="white-bg text-align orange-clr-fnt"> 
+                        <IonRow className="mt-1">
+                        <button  className="white-bg text-align orange-clr-fnt mr-2"> 
                             { new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(info.Цена * Количество)  }
                         </button>
-                            <IonChip outline color="right bs-btn" 
-                                  onClick = {()=>{
-                                    updBasket(info.Код, -1)
-                                    setUpd(upd + 1);
-                                  }}  >
-                              -
-                              </IonChip>
+                        
+                        
+                        <IonButton className="bs-size-btn left" color="new" 
+                                onClick = {(e)=>{
+                                  updBasket(info.Код, -1)
+                                  setUpd(upd + 1);
+                                }}
+                            >-</IonButton>
                             
-                            <button  className="f-16 white-bg text-align"
+                            <button  className="white-bg text-align "
                             > 
-                            <a >{ Количество.toFixed() + " шт."} </a>
+                            <h5 className="bs-quan">{ Количество.toFixed() + " шт."} </h5>
                             </button>
-                            <IonChip outline color="left bs-btn" 
-                                  onClick = {()=>{
-                                    updBasket(info.Код, 1)
-                                    setUpd(upd + 1);
-                                  }}  >
-                              +
-                              </IonChip>
-                            
+                            <IonButton className="bs-size-btn " color="new" 
+                                onClick = {(e)=>{
+                                  updBasket(info.Код, 1)
+                                  setUpd(upd + 1);
+                                }}
+                            >+</IonButton>
+                           
                             
                         </IonRow>
                         
@@ -234,24 +234,24 @@ function  delBasket(Код){
                       Store.dispatch({type: "route", route: "back"})
                     }} className="btn"
                   > 
-                    <IonIcon icon = { arrowBackOutline } />
+                    <IonIcon className="b-size-btnx" icon = { arrowBackOutline } />
                   </button>
                 </IonCol>
                 <IonCol size="6" >
-                <button  className="m-header btn"
+                <button  className="header btn"
 > 
-                    <b><a >Корзина</a></b>
+                    <h4 className="header-font"><b>Корзина</b></h4>
                   </button>
                 </IonCol> 
                 
                 <IonCol size="5">
-                  <button  className="m-header btn"
+                  <button  className="header btn"
                       onClick = {()=>{
                       Store.dispatch({type: "basket", basket: []})
                       setBasket([]);
                     }}
                   > 
-                    <a >Очистить всё</a>
+                    <h4 className="header-font2">Очистить всё</h4>
                   </button>
                 </IonCol> 
               </IonRow>        
@@ -267,14 +267,14 @@ function  delBasket(Код){
             <IonRow>
               <IonCol size="6">
                 <div className="left">
-                  <IonText class="f-18 ml-1">
+                  <IonText class="basketnameofgood ml-1">
                     <b>Итого </b>
                   </IonText>
                 </div>
               </IonCol>
               <IonCol size="6">
                 <div className="right orange-clr-fnt">
-                <IonText class="f-18 ml-1">
+                <IonText class="basketnameofgood ml-1">
                  <b>{ new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(sum)  }</b>
                  </IonText>
                 </div>

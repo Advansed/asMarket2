@@ -44,7 +44,7 @@ export function Categories():JSX.Element {
             <div className="ct-card" key = { i }
                 onClick = { () => onClick(info[i], 0) }
             >
-                <div className="circle">
+                <div className="ct-circle">
                 <IonImg class="ct-img" src={ info[i].Картинка } /></div>
                 <div className="ct-text">
                     <IonText> { info[i].Наименование }</IonText>

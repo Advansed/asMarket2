@@ -12,10 +12,11 @@ import {
   IonMenuToggle,
   IonNote,
   IonRow,
+  
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, bookmarksOutline, checkboxOutline, contractOutline, happyOutline, heartOutline, heartSharp, homeOutline, logInOutline, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, personCircleOutline, personOutline, personSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
 import './Menu.css';
 import { Store } from '../pages/Store';
 
@@ -30,8 +31,14 @@ const appPages: AppPage[] = [
   {
     title: 'Категории',
     url: '/page/root',
-    iosIcon: mailOutline,
+    iosIcon: homeOutline,
     mdIcon: mailSharp
+  },
+  {
+    title: 'Акции',
+    url: '/goods/about',
+    iosIcon: heartOutline,
+    mdIcon: archiveSharp
   },
   {
     title: 'Заказы',
@@ -40,26 +47,27 @@ const appPages: AppPage[] = [
     mdIcon: paperPlaneSharp
   },
   {
-    title: 'История',
+    title: 'История заказов',
     url: '/goods/history',
-    iosIcon: heartOutline,
+    iosIcon: bookmarksOutline,
     mdIcon: heartSharp
   },
   {
     title: 'Условия работы',
     url: '/goods/cond',
-    iosIcon: trashOutline,
+    iosIcon: checkboxOutline,
     mdIcon: trashSharp
   },
   {
     title: 'О нас',
     url: '/goods/about',
-    iosIcon: archiveOutline,
+    iosIcon: happyOutline,
     mdIcon: archiveSharp
   },
+ 
 ];
 
-const labels = ['Акции', 'Бренды', 'Скидки', 'Уценка', 'Распродажа'];
+
 
 const Menu: React.FC = () => {
   const location = useLocation();
@@ -70,49 +78,49 @@ const Menu: React.FC = () => {
         <IonList id="inbox-list">
           <IonListHeader>
           <IonMenuToggle autoHide={false}>
-            <IonItem>
-              <IonImg slot = "start" src = "assets/asMarket.jpg" class="m-img" />
-                <div>
-                  <div>
-                    Маркет Ас
+            
+              <IonRow>
+              <IonImg  src = "assets/asMarket.jpg" class="m-img" />
+              <div className="m-header">
+                    <p>Добро</p>
+                    <p>пожаловать!</p>
                   </div>
+              </IonRow>
+              <hr></hr>
+              <IonRow>
+                  
                   <div>
-                    <IonButton
-                      expand= "block"
+                    <IonIcon icon={personOutline} className="m-mr"></IonIcon>
+                    <button
+                     className="m-btn m-sizetext"
                       onClick = {()=>{
                         if(Store.getState().auth)
                           Store.dispatch({type: "route", route: "/page/options"})
                         else
                           Store.dispatch({type: "route", route: "/page/login"})
                       }}
-                    > { Store.getState().auth ? "Профиль" : "Вход" } </IonButton>
+                    > 
+                    { Store.getState().auth ? "Профиль" : "Вход" }
+                     </button>
                   </div>
-                </div>
-            </IonItem>
+                  </IonRow>
+            
             </IonMenuToggle>
           </IonListHeader>
           
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                  <IonLabel>{appPage.title}</IonLabel>
+                <IonItem routerLink={appPage.url} routerDirection="none" lines="none" detail={false} >
+                  <IonIcon  className="m-mr2" ios={appPage.iosIcon}  />
+                  <IonLabel className=" m-sizetext">{appPage.title}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
             );
           })}
         </IonList>
 
-        <IonList id="labels-list">
-          <IonListHeader>Акции, Скидки, Бренды</IonListHeader>
-          {labels.map((label, index) => (
-            <IonItem lines="none" key={index}>
-              <IonIcon slot="start" icon={bookmarkOutline} />
-              <IonLabel>{label}</IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+        
       </IonContent>
     </IonMenu>
   );

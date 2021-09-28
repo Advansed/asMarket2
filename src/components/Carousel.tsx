@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { IonCard, IonItem, IonLabel, IonList, IonSlide, IonSlides, IonText } from '@ionic/react';
+import { IonCard, IonItem, IonLabel, IonList, IonSlide,IonImg, IonChip,IonCardSubtitle, IonSlides, IonText, IonButton} from '@ionic/react';
 
 import './Carousel.css';
 
@@ -67,93 +67,91 @@ export function Carousel():JSX.Element {
 
     return <Slides />
 
-    // return <>
-    // <div className="body">
-    // <div className="slider">
-    //     <div className="slides">
-    //         <input type="radio" name="radio-btn" id="radio1"/>
-    //         <input type="radio" name="radio-btn" id="radio2"/>
-    //         <input type="radio" name="radio-btn" id="radio3"/>
-    //         <input type="radio" name="radio-btn" id="radio4"/>
-
-    //         <div className="slide first">
-    //             <img src="/assets/carousel img/1.png" alt=""/>
-    //         </div>
-    //         <div className="slide">
-    //             <img src="/assets/carousel img/2.png" alt=""/>
-    //         </div>
-    //         <div className="slide">
-    //             <img src="/assets/carousel img/3.png" alt=""/>
-    //         </div>
-    //         <div className="slide">
-    //             <img src="/assets/carousel img/4.png" alt=""/>
-    //         </div>
-
-    //         <div className="navigation-auto">
-    //             <div className="auto-btn1"></div>
-   //             <div className="auto-btn2"></div>
-    //             <div className="auto-btn3"></div>
-    //             <div className="auto-btn4"></div>
-    //         </div>
-    //     </div>
-    //     <div className="navigation-manual">
-    //         <label htmlFor="radio1" className="manual-btn"></label>
-    //         <label htmlFor="radio2" className="manual-btn"></label>
-    //         <label htmlFor="radio3" className="manual-btn"></label>
-    //         <label htmlFor="radio4" className="manual-btn"></label>
-    //     </div>
-    // </div>
-    // </div>
-    // </>
-
 }
 
 
 export function Action():JSX.Element {
-    const [info, setInfo] = useState<any> ()
-    
-    useEffect(()=>{
-        setInfo(Store.getState().action);
-        console.log(Store.getState().action)
-    },[])
+    const [info, setInfo] = useState<any>([])
+    const [cats, setCats] = useState<any>([])
+    const [cat,  setCat]  = useState<any>()
 
-    Store.subscribe({num: 8, type: "action", func: ()=>{
-        setInfo(Store.getState().action)
-        console.log("sunscribe")
-        console.log(Store.getState().action)
-    }})
+    Store.subscribe({num: 11, type: "categories", func : ()=>{ setInfo( Store.getState().categories ) }})
 
-    let items = <></>
+    useEffect(()=>{ setInfo( Store.getState().categories ) }, [])
 
-    console.log(info)
-    for(let i = 0; i < info?.Товары.length;i++){
-        items = <>  
-            { items }
-            <Good info = { info.Товары[i] } />
+    useEffect(()=> { 
+        if(info.length > 0) {
+            setCats(info[0]) 
+            Store.dispatch({type: "category", category: info[0]})
+        }
+    }, [info])
+
+    useEffect(()=> { 
+        if(cats.Категории?.length > 0) {
+            setCat(cats.Категории[0]) 
+            Store.dispatch({type: "sub", sub: cats.Категории[0]})
+        }
+    }, [cats])
+
+    function onClick(info, num) {
+        if(num === 0) { setCats(info) }
+        if(num === 1) { 
+            setCat(info)
+            Store.dispatch({type: "sub", sub: info})
+        }
+    }
+    let elem = <></>
+
+    for(let i = 0;i < info.length;i++){
+        elem = <>
+            { elem }
+            <div className="ct-card" key = { i }
+                onClick = { () => onClick(info[i], 0) }
+            >
+                <div className="circle">
+                <IonImg class="ct-img" src={ info[i].Картинка } /></div>
+                <div className="ct-text">
+                    <IonText> { info[i].Наименование }</IonText>
+                </div>
+
+            </div>
         </>
     }
 
-    let elem = <>
-        <IonCard class="w-90">
-            <IonList >
-            <IonItem class="m-1">
-                    <IonLabel position="stacked"> Наименование </IonLabel>
-                    <IonText>{ info?.Наименование }</IonText>
-                </IonItem>
-                <IonItem class="m-1">
-                    <IonLabel position="stacked"> Текст </IonLabel>
-                    <IonText>{ info?.Заголовок }</IonText>
-                </IonItem>
-                <IonItem>
-                    <IonLabel position="stacked"> Описание </IonLabel>
-                    <IonText> { info?.Описание} </IonText>
-                </IonItem>
-            </IonList>
-        </IonCard>
-        <div className="g-content">
+    let items = <></>
+
+    
+    for(let i = 0;i < cats.Категории?.length;i++){
+        
+        items = <>
             { items }
+
+            <IonChip className="ct-chip bgcolor2" key = { i }
+                onClick = { () => onClick( cats.Категории[i], 1)}
+            >
+                { cats.Категории[i].Наименование }
+            </IonChip>
+        </>
+    }
+
+    return <>
+            <div className="discountsliderbox">
+            <div className="discountscrollbar">
+                <div className="discountbox1"><b className="boxcolor">Акция 1</b></div>
+                <div className="discountbox2"><b className="boxcolor">Акция 2</b></div>
+                <div className="discountbox3"><b className="boxcolor">Акция 3</b></div>
+                <div className="discountbox4"><b className="boxcolor">Акция 4</b></div>
+                <div className="discountbox5"><b className="boxcolor">Акция 5</b></div>
+            </div>
+        </div>
+        <div className="ct-content">
+            { elem }
+        </div>
+        <div className="ct-content">
+            <div className="ct-chip-div"> 
+                { items }
+            </div>
         </div>
     </>
 
-    return elem
 }

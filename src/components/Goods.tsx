@@ -82,7 +82,7 @@ export function   Good(props):JSX.Element {
                         e.stopPropagation()
                     }}
                 >+</IonButton>
-                <IonButton color="new" size="small">
+                <IonButton className="g-size-btn2" color="new" size="small">
                     {
                     info.СтараяЦена > 0 
                         ?<>

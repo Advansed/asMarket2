@@ -215,9 +215,7 @@ export function   Order( props ):JSX.Element {
               } </IonLabel>
             </IonItem>
           </IonList>
-          
-        </IonCardContent>
-        <div className="footer-order">
+          <div className="footer-order">
          
          <div className="btn">
                <button
@@ -231,6 +229,8 @@ export function   Order( props ):JSX.Element {
              </div>
      
      </div>
+        </IonCardContent>
+        
       <IonAlert
             isOpen={ message !== "" }
             onDidDismiss={() => setMessage("")}
